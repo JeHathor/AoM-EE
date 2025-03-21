@@ -31,4 +31,5 @@ Otherwise all AI will get a desynch sensitive handicap of 100%.
 
 -----------------------------------------------------------
 Do you like this mod? Help others to find it by giving it a thumbs up. 👍
-https://buymeacoffee.com/jehathor
+Get it via Steam-Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2378309786
+Support my Mods: https://buymeacoffee.com/jehathor
