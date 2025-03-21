@@ -1,3 +1,4 @@
+# Antisthenes (AI)
 Antisthenes is the first AI to allow a combination of different
 difficulty levels in one game (single and multiplayer).
 
