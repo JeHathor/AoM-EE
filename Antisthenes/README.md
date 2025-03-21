@@ -18,9 +18,8 @@ Antisthenes Elo 1900
 Antisthenes Elo 2000  
 Antisthenes Elo 2100  
 
+- Random/Adaptive Levels  
 Antisthenes Wildcard  [1600-2100 | avg.1750+]  
-
-### NEW
 Antisthenes Adaptive  (Exactly matches it's opponent - Never too strong, always a challenge!)  
 
 - Boss Fight  
