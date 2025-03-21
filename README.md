@@ -30,6 +30,6 @@ Never set the global settings to Titan if you play in multiplayer!
 Otherwise all AI will get a desynch sensitive handicap of 100%.
 
 -----------------------------------------------------------
-Do you like this mod? Help others to find it by giving it a thumbs up. 👍
 Get it via Steam-Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2378309786
+Do you like this mod? Help others to find it by giving it a thumbs up. 👍
 Support my Mods: https://buymeacoffee.com/jehathor
