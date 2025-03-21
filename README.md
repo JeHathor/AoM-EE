@@ -19,7 +19,7 @@ Antisthenes Elo 2100
 
 Antisthenes Wildcard  [1600-2100 | avg.1750+]
 
-# NEW
+### NEW
 Antisthenes Adaptive  (Exactly matches it's opponent - Never too strong, always a challenge!)
 
 - Boss Fight
