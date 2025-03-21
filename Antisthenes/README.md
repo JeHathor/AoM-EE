@@ -26,7 +26,7 @@ Antisthenes Adaptive  (Exactly matches it's opponent - Never too strong, always 
 Antisthenes Elo 9999  
 
 Never set the global settings to Titan if you play in multiplayer!  
-Otherwise all AI will get a desync sensitive handicap of 100%.  
+Otherwise all AI will get a desync sensitive handicap of 100% (hardcoded).  
 
 -----------------------------------------------------------
 -> Get it via Steam-Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2378309786  
