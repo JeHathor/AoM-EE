@@ -3964,7 +3964,9 @@ void init(void)
       nearCenter = (nearCenter + kbGetMapCenter()) / 2.0;   // 3/4 of the way to map center
       aiTaskUnitMove(transportID, nearCenter);
       printEcho("Sending transport "+transportID+" to near map center at "+nearCenter);
+
       xsEnableRule("vinlandsagaFailsafe");  // In case something prevents transport from reaching, turn on the explore plan.
+
       //Turn off fishing.
       xsDisableRule("fishing");
       //Pause the age upgrades.
@@ -7486,15 +7488,16 @@ rule findVinlandsagaBase
    vector location=kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
 
    //Find the mainland area group.
-   int mainlandGroupID=-1;
-   if (cvRandomMapName == "vinlandsaga")
-      mainlandGroupID=kbFindAreaGroup(cAreaGroupTypeLand, 3.0, kbAreaGetIDByPosition(location));
-   else
-      mainlandGroupID=kbFindAreaGroupByLocation(cAreaGroupTypeLand, 0.5, 0.5);  // Can fail if mountains at map center
-//      mainlandGroupID=kbFindAreaGroup(cAreaGroupTypeLand, 1.2, kbAreaGetIDByPosition(location));   // Instead, look for one 20% larger than start area group.
-
+   int mainlandGroupID=kbAreaGroupGetIDByPosition(kbUnitGetPosition(findIsolatedSettlement()));
    if (mainlandGroupID < 0)
-      return;
+   {
+	if (cvRandomMapName == "vinlandsaga")
+	    mainlandGroupID=kbFindAreaGroup(cAreaGroupTypeLand, 3.0, kbAreaGetIDByPosition(location));
+	else
+	    mainlandGroupID=kbFindAreaGroupByLocation(cAreaGroupTypeLand, 0.5, 0.5);  // Can fail if mountains at map center
+	//  mainlandGroupID=kbFindAreaGroup(cAreaGroupTypeLand, 1.2, kbAreaGetIDByPosition(location));   // Instead, look for one 20% larger than start area group.
+   }
+   if (mainlandGroupID < 0) {return;}
    printEcho("findVinlandsagaBase: Found the mainland, AGID="+mainlandGroupID+".");
 
    // stop the transport right away

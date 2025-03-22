@@ -36,6 +36,7 @@
 	buildSecondDock
 	equal
 	isSameAreaGroup
+	findIsolatedSettlement
 	buildHouseClassic
 	buildHouse
 	aiTaskBuildSettlement
@@ -1969,6 +1970,7 @@ bool isSameAreaGroup(vector vec1 = cInvalidVector, vector vec2 = cInvalidVector)
 //==============================================================================
 int findIsolatedSettlement(void)
 {
+   vector homeLocation=kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
    int count=-1;
    static int unitQueryID=-1;
 
@@ -1982,6 +1984,11 @@ int findIsolatedSettlement(void)
 		kbUnitQuerySetPlayerID(unitQueryID, 0);
 	  kbUnitQuerySetUnitType(unitQueryID, cUnitTypeSettlement);
 	  kbUnitQuerySetState(unitQueryID, cUnitStateAny);
+	  if(equal(homeLocation, cInvalidVector)==false)
+	  {
+	    kbUnitQuerySetPosition(unitQueryID, homeLocation);
+	    kbUnitQuerySetAscendingSort(unitQueryID, true);
+	  }
 	}
 	else
 	return(-1);
@@ -1991,7 +1998,7 @@ int findIsolatedSettlement(void)
    for (i=0; < numberFound)
    {
         int someTC = kbUnitQueryGetResult(unitQueryID, i);
-	vector here = kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID));
+	vector here = homeLocation;
 	vector there = kbUnitGetPosition(someTC);
 
 	if (isSameAreaGroup(there, here)==false && equal(there, cInvalidVector)==false && someTC > 0)
@@ -2471,7 +2478,7 @@ rule buildSettlements
 // RULE: claimRemoteSettlement
 //==============================================================================
 rule claimRemoteSettlement
-minInterval 26	//starts in cAge3
+minInterval 56	//starts in cAge3
 inactive
 {
    if (kbUnitCount(cMyID, cUnitTypeTransport, cUnitStateAlive) < 1)
@@ -2485,7 +2492,17 @@ inactive
    }
 
    int newSettlementID = findIsolatedSettlement();
-   if(newSettlementID == glastRemoteSettlementTargetID)
+   if(
+	newSettlementID == glastRemoteSettlementTargetID	//example: -1
+	||
+	(
+	    gRemoteSettlementBuildPlan >= 0
+	    &&
+	    aiPlanGetState(gRemoteSettlementBuildPlan) != cPlanStateDone
+	    &&
+	    aiPlanGetState(gRemoteSettlementBuildPlan) != cPlanStateFailed
+	)
+     )
    {
 		return;
    }else{
@@ -2493,6 +2510,7 @@ inactive
 	aiPlanDestroy(gRemoteSettlementBuildPlan);
 	aiPlanDestroy(gRemoteSettlementTransportPlan);
 	aiPlanDestroy(gRemoteSettlementExplorePlan);
+	gRemoteSettlementBuildPlan = -1;
 
         //and then make new ones!
 	int baseID = kbBaseGetMainID(cMyID);
