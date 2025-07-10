@@ -302,6 +302,7 @@ extern int gOtherBaseAttackPlan = -1;		// Uber-plan to attack other TCs (new)
 extern int gSettlementGuardPlan = -1;		// Try to disrupt our opponent from building settlements.
 extern int gNumberMilitaryUnitTypes = 2;
 extern bool gFowardBuildings = false;		//Is this strategy active?
+extern bool gPeriodicAttackTimeOut = false;
 
 //==============================================================================
 //Defend Plan Locations.
@@ -8061,6 +8062,8 @@ active
 	}
    }
 
+   bool activeAssault = false;		//Are we still going?
+
    vector baseFront = xsVectorNormalize(kbGetMapCenter()-kbGetTownLocation());
    int mhpTitans = kbUnitCount(mhpID, cUnitTypeAbstractTitan, cUnitStateAlive);
    int myTitans = kbUnitCount(cMyID, cUnitTypeAbstractTitan, cUnitStateAlive);
@@ -8083,6 +8086,7 @@ active
       aiPlanSetVariableVector(gMostRecentAttackPlanID, cAttackPlanGatherPoint, 0, planPosition);
       gMilitaryGatherPoint=setMilitaryGatherPointAllBases(planPosition);
       aiPlanSetVariableFloat(gMostRecentAttackPlanID, cAttackPlanGatherDistance, 0, 200.0);
+      activeAssault = true;
    }else{
       xsEnableRule("defendPlanRule");	// Reactivate the defend plan.
       vector basePosition = kbBaseGetLastKnownDamageLocation(cMyID, kbBaseGetMainID(cMyID));
@@ -8093,6 +8097,7 @@ active
       aiPlanSetVariableVector(gMostRecentAttackPlanID, cAttackPlanGatherPoint, 0, basePosition);
       gMilitaryGatherPoint=setMilitaryGatherPointAllBases(basePosition);
       aiPlanSetVariableFloat(gMostRecentAttackPlanID, cAttackPlanGatherDistance, 0, 0.0);
+      activeAssault = false;
    }
    int tcInProgress = findUnit(cMyID, cUnitStateBuilding, cUnitTypeSettlementLevel1);
    if(tcInProgress > 0)
@@ -8141,9 +8146,27 @@ active
 	}
 	kbUnitPickSetMinimumNumberUnits(gLandUPID, minAttackSize);
 	kbUnitPickSetMaximumNumberUnits(gLandUPID, gTargetMilitarySize);
+
+	int attackFrequency = aiPlanGetVariableInt(gLandAttackGoalID, cGoalPlanAttackStartFrequency, 0);
+
 	//Update Attack Goal
-	aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMinUnitNumber, 0, minAttackSize);
+	if(activeAssault)	//Just go?
+	{
+            if(attackFrequency > 4)
+	    {
+		attackFrequency--;
+	    }
+	    aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMinUnitNumber, 0, 3);
+	}else{
+            if(attackFrequency < 70)
+	    {
+		attackFrequency++;
+	    }
+	    aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMinUnitNumber, 0, minAttackSize);
+	}
 	aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMaxUnitNumber, 0, maxAttackSize);
+
+	aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanAttackStartFrequency, 0, attackFrequency);
 
 	int mediumAttackSize = (minAttackSize+maxAttackSize)*0.5;
 	if(maxAttackSize < 0)	//No Limit?
