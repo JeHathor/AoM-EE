@@ -3880,7 +3880,7 @@ void init(void)
       gNumBoatsToMaintain = gNumBoatsToMaintain/4;	//3 Ships
    if (cvMasterDifficulty == cDifficultyModerate)
       gNumBoatsToMaintain = gNumBoatsToMaintain/3;	//4 Ships
-   if (cvMasterDifficulty == cDifficultyModerate)
+   if (cvMasterDifficulty == cDifficultyHard)
       gNumBoatsToMaintain = gNumBoatsToMaintain/2;	//6 Ships
 
    if (cvPlayerToAttack < 1)	//Find someone to hate.
