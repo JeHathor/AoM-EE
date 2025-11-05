@@ -1911,7 +1911,7 @@ rule buildSecondDock
    if (fishCount > 6*(cNumberPlayers-1) && kbResourceGet(cResourceWood) > 150 && kbResourceGet(cResourceGold) > 50)
    {
 	// Make sure we have a dock
-	if(kbUnitCount(cMyID,cUnitTypeDock) <= 1)
+	if(kbUnitCount(cMyID, cUnitTypeDock, cUnitStateAliveOrBuilding) <= 1)
 	{
 		int areaID = kbAreaGetClosetArea(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)), cAreaTypeWater);
 		int buildDock = aiPlanCreate("BuildDock2", cPlanBuild);
@@ -1924,10 +1924,9 @@ rule buildSecondDock
 		   aiPlanAddUnitType(buildDock, getBuilderType(), 1, 1, 1);
 		   aiPlanSetEscrowID(buildDock, cEconomyEscrowID);
 		   aiPlanSetActive(buildDock);
-
-			xsDisableSelf();	//Done.
 		}
 	}
+	xsSetRuleMinIntervalSelf(95);		//Check again later.
    }
 }
 
