@@ -303,6 +303,7 @@ extern int gSettlementGuardPlan = -1;		// Try to disrupt our opponent from build
 extern int gNumberMilitaryUnitTypes = 2;
 extern bool gFowardBuildings = false;		//Is this strategy active?
 extern bool gPeriodicAttackTimeOut = false;
+extern int gAssaultStartTime = -1;
 
 //==============================================================================
 //Defend Plan Locations.
@@ -8079,6 +8080,8 @@ active
 		||
 		(milAttack && econAttack && kbGetAge() > cAge3)
 	)
+	&&
+	(xsGetTime() - gAssaultStartTime < 5*60*1000)	//No single attack should be eternal!
      )
    {
       xsDisableRule("defendPlanRule");	// Pause the defend plan.
@@ -8086,6 +8089,7 @@ active
       aiPlanSetVariableVector(gMostRecentAttackPlanID, cAttackPlanGatherPoint, 0, planPosition);
       gMilitaryGatherPoint=setMilitaryGatherPointAllBases(planPosition);
       aiPlanSetVariableFloat(gMostRecentAttackPlanID, cAttackPlanGatherDistance, 0, 200.0);
+      if (gAssaultStartTime < 0) {gAssaultStartTime = xsGetTime();}
       activeAssault = true;
    }else{
       xsEnableRule("defendPlanRule");	// Reactivate the defend plan.
@@ -8097,6 +8101,7 @@ active
       aiPlanSetVariableVector(gMostRecentAttackPlanID, cAttackPlanGatherPoint, 0, basePosition);
       gMilitaryGatherPoint=setMilitaryGatherPointAllBases(basePosition);
       aiPlanSetVariableFloat(gMostRecentAttackPlanID, cAttackPlanGatherDistance, 0, 0.0);
+      gAssaultStartTime = -1;	//Reset.
       activeAssault = false;
    }
    int tcInProgress = findUnit(cMyID, cUnitStateBuilding, cUnitTypeSettlementLevel1);
