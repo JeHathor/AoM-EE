@@ -39,6 +39,8 @@ rule aiCheatRule
 		    &&
 		    (kbResourceGet(cResourceFavor) < 50 && kbGetAge() > cAge3)
 		)
+		||
+		(kbResourceGet(cResourceFavor) < 10 && kbGetAge() >= cAge4)
 	  )
 	{
 		aiResourceCheat( cMyID, cResourceFavor, 1.0 );
