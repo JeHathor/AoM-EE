@@ -182,86 +182,89 @@ vector findBestSettlement(int playerID=0)
 //==============================================================================
 bool findASettlement()
 {
-   int count=-1;
-   static int unitQueryID=-1;
+    int count = -1;
+    static int unitQueryID = -1;
 
-   //Create the query if we don't have it yet.
-   if (unitQueryID < 0)
-	  unitQueryID=kbUnitQueryCreate("getAnUnClaimedSettlements");
-   
-	//Define a query to get all matching units.
-	if (unitQueryID != -1)
-	{
-		kbUnitQuerySetPlayerID(unitQueryID, 0);
-	  kbUnitQuerySetUnitType(unitQueryID, cUnitTypeSettlement);
-	  kbUnitQuerySetState(unitQueryID, cUnitStateAny);
-	}
-	else
-	return(false);
+    // Create the query if we don't have it yet.
+    if (unitQueryID < 0)
+	unitQueryID = kbUnitQueryCreate("getUnClaimedSettlements");
 
-   kbUnitQueryResetResults(unitQueryID);
-	int numberFound=kbUnitQueryExecute(unitQueryID);
-   if (numberFound > 0)
-	  return(true);
-   return(false);
+    // Define a query to get all matching units.
+    if (unitQueryID != -1)
+    {
+	kbUnitQuerySetPlayerID(unitQueryID, 0);
+	kbUnitQuerySetUnitType(unitQueryID, cUnitTypeSettlement);
+	kbUnitQuerySetState(unitQueryID, cUnitStateAny);
+    }
+    else
+	return false;
+
+    kbUnitQueryResetResults(unitQueryID);
+    int numberFound = kbUnitQueryExecute(unitQueryID);
+
+    if (numberFound > 0)
+	return true;
+
+    return false;
 }
 
 //==============================================================================
 // getNumberUnits
 //==============================================================================
-int getNumberUnits(int unitType=-1, int playerID=-1, int state=cUnitStateAlive)
+int getNumberUnits(int unitType = -1, int playerID = -1, int state = cUnitStateAlive)
 {
-	int count=-1;
-   static int unitQueryID=-1;
+    int count = -1;
+    static int unitQueryID = -1;
 
-   //Create the query if we don't have it yet.
-   if (unitQueryID < 0)
-	  unitQueryID=kbUnitQueryCreate("GetNumberOfUnitsQuery");
-   
-	//Define a query to get all matching units.
-	if (unitQueryID != -1)
-	{
-		kbUnitQuerySetPlayerID(unitQueryID, playerID);
-	  kbUnitQuerySetUnitType(unitQueryID, unitType);
-	  kbUnitQuerySetState(unitQueryID, state);
-	}
-	else
-	return(0);
+    // Create the query if we don't have it yet.
+    if (unitQueryID < 0)
+	unitQueryID = kbUnitQueryCreate("GetNumberOfUnitsQuery");
 
-	kbUnitQueryResetResults(unitQueryID);
-	return(kbUnitQueryExecute(unitQueryID));
+    // Define a query to get all matching units.
+    if (unitQueryID != -1)
+    {
+	kbUnitQuerySetPlayerID(unitQueryID, playerID);
+	kbUnitQuerySetUnitType(unitQueryID, unitType);
+	kbUnitQuerySetState(unitQueryID, state);
+    }
+    else
+	return 0;
+
+    kbUnitQueryResetResults(unitQueryID);
+    return kbUnitQueryExecute(unitQueryID);
 }
 
 //==============================================================================
 // getUnit
 //==============================================================================
-int getUnit(int unitType=-1)
+int getUnit(int unitType = -1)
 {
-	int retVal=-1;
-   int count=-1;
-	static int unitQueryID=-1;
-   
-   //Create the query if we don't have it yet.
-   if (unitQueryID < 0)
-	  unitQueryID=kbUnitQueryCreate("getUnitQuery");
+    int retVal = -1;
+    int count = -1;
+    static int unitQueryID = -1;
 
-	//Define a query to get all matching units.
-	if (unitQueryID != -1)
-	{
-		kbUnitQuerySetPlayerID(unitQueryID, cMyID);
-	  kbUnitQuerySetUnitType(unitQueryID, unitType);
-	  kbUnitQuerySetState(unitQueryID, cUnitStateAlive);
-	}
-	else
-	return(-1);
+    // Create the query if we don't have it yet.
+    if (unitQueryID < 0)
+	unitQueryID = kbUnitQueryCreate("getUnitQuery");
 
-   kbUnitQueryResetResults(unitQueryID);
-	count=kbUnitQueryExecute(unitQueryID);
+    // Define a query to get all matching units.
+    if (unitQueryID != -1)
+    {
+	kbUnitQuerySetPlayerID(unitQueryID, cMyID);
+	kbUnitQuerySetUnitType(unitQueryID, unitType);
+	kbUnitQuerySetState(unitQueryID, cUnitStateAlive);
+    }
+    else
+	return -1;
 
-	//Pick a unit and return its ID, or return -1.
-	if (count > 0)
-	  retVal=kbUnitQueryGetResult(unitQueryID, 0);
-	return(retVal);
+    kbUnitQueryResetResults(unitQueryID);
+    count = kbUnitQueryExecute(unitQueryID);
+
+    // Pick a unit and return its ID, or return -1.
+    if (count > 0)
+	retVal = kbUnitQueryGetResult(unitQueryID, 0);
+
+    return retVal;
 }
 
 //==============================================================================
@@ -685,7 +688,7 @@ rule updateWoodBreakdown
    int mainBaseID = kbBaseGetMainID(cMyID);
 
    int woodPriority=50;
-   if (cMyCulture == cCultureEgyptian)
+   if (cMyCulture == cCultureEgyptian && kbGetAge() >= cAge2)
 	  woodPriority=55;
 
    if(gFishMap && kbGetAge() == cAge1)
@@ -1997,7 +2000,7 @@ int findIsolatedSettlement(void)
 	int numberFound=kbUnitQueryExecute(unitQueryID);
    for (i=0; < numberFound)
    {
-        int someTC = kbUnitQueryGetResult(unitQueryID, i);
+	int someTC = kbUnitQueryGetResult(unitQueryID, i);
 	vector here = homeLocation;
 	vector there = kbUnitGetPosition(someTC);
 
@@ -2117,8 +2120,6 @@ rule buildHouse
    minInterval 11	//starts in cAge1
    active
 {
-    static int unitQueryID=-1;
-
     int houseProtoID = cUnitTypeHouse;
     if (cMyCulture == cCultureAtlantean)
     {
@@ -2506,13 +2507,13 @@ inactive
    {
 		return;
    }else{
-        //clean-up old plans...
+	//clean-up old plans...
 	aiPlanDestroy(gRemoteSettlementBuildPlan);
 	aiPlanDestroy(gRemoteSettlementTransportPlan);
 	aiPlanDestroy(gRemoteSettlementExplorePlan);
 	gRemoteSettlementBuildPlan = -1;
 
-        //and then make new ones!
+	//and then make new ones!
 	int baseID = kbBaseGetMainID(cMyID);
 	vector baseLoc = kbBaseGetLocation(cMyID, baseID);
 	int startAreaID = kbAreaGetIDByPosition(baseLoc);
