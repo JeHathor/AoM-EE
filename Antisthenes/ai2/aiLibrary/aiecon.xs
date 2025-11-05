@@ -197,15 +197,15 @@ bool findASettlement()
 	kbUnitQuerySetState(unitQueryID, cUnitStateAny);
     }
     else
-	return false;
+	return(false);
 
     kbUnitQueryResetResults(unitQueryID);
     int numberFound = kbUnitQueryExecute(unitQueryID);
 
     if (numberFound > 0)
-	return true;
+	return(true);
 
-    return false;
+    return(false);
 }
 
 //==============================================================================
@@ -228,10 +228,10 @@ int getNumberUnits(int unitType = -1, int playerID = -1, int state = cUnitStateA
 	kbUnitQuerySetState(unitQueryID, state);
     }
     else
-	return 0;
+	return(0);
 
     kbUnitQueryResetResults(unitQueryID);
-    return kbUnitQueryExecute(unitQueryID);
+    return(kbUnitQueryExecute(unitQueryID));
 }
 
 //==============================================================================
@@ -255,7 +255,7 @@ int getUnit(int unitType = -1)
 	kbUnitQuerySetState(unitQueryID, cUnitStateAlive);
     }
     else
-	return -1;
+	return(-1);
 
     kbUnitQueryResetResults(unitQueryID);
     count = kbUnitQueryExecute(unitQueryID);
@@ -264,7 +264,7 @@ int getUnit(int unitType = -1)
     if (count > 0)
 	retVal = kbUnitQueryGetResult(unitQueryID, 0);
 
-    return retVal;
+    return(retVal);
 }
 
 //==============================================================================
@@ -1910,7 +1910,7 @@ rule buildSecondDock
    int fishCount = kbUnitCount(0, cUnitTypeFish, cUnitStateAlive);
    if (fishCount > 6*(cNumberPlayers-1) && kbResourceGet(cResourceWood) > 150 && kbResourceGet(cResourceGold) > 50)
    {
-	dockThreshold = 1;	//2nd dock.
+	int dockThreshold = 1;	//2nd dock.
 	if(kbGetAge() > cAge2 && cvMasterDifficulty >= cDifficultyHard)
 	{
 		dockThreshold = 2;	//3rd dock.

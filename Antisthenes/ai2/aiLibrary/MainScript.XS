@@ -5247,7 +5247,7 @@ inactive
 		gAge4MinorGod=chooseMinorGod(cAge4, -1, -1);
 	 }
 	 if ((gAge4ProgressionPlanID >= 0) && (gAge4MinorGod != -1))
-	 { 
+	 {
 	    aiPlanSetVariableInt(gAge4ProgressionPlanID, cProgressionPlanGoalTechID, 0, gAge4MinorGod);
 	    aiPlanSetDesiredPriority(gAge4ProgressionPlanID, 100);
 		      aiPlanSetEscrowID(gAge4ProgressionPlanID, cEconomyEscrowID);
@@ -6167,6 +6167,10 @@ void age5Handler(int age=4)
    kbEscrowSetCap(cEconomyEscrowID, cResourceWood, 300.0);
    kbEscrowSetCap(cEconomyEscrowID, cResourceGold, 300.0);
    kbEscrowSetCap(cEconomyEscrowID, cResourceFavor, 40.0);
+   kbEscrowSetCap(cMilitaryEscrowID, cResourceFood, 700.0);
+   kbEscrowSetCap(cMilitaryEscrowID, cResourceWood, 700.0);
+   kbEscrowSetCap(cMilitaryEscrowID, cResourceGold, 700.0);
+   kbEscrowSetCap(cMilitaryEscrowID, cResourceFavor, 50.0);
 }
 
 //==============================================================================
@@ -6841,6 +6845,10 @@ rule trainGatherers
     {
 	return;		//DM needs no more yet.
     }
+    if (kbGetPop()+2 > kbGetPopCap())
+    {
+	return;		//Overshoot - don't queue any more.
+    }
     //Hack to queue villagers from multiple(!) bases.
     int numTC = kbUnitCount(cMyID, cUnitTypeAbstractSettlement, cUnitStateAlive);
     if(numTC < 1 || getGathererType() < 0)
@@ -6936,6 +6944,10 @@ rule TrainFishingShips
     {
 	xsDisableSelf();
 	return;
+    }
+    if (kbGetPop()+1 > kbGetPopCap())
+    {
+	return;		//Overshoot - don't queue any more.
     }
 
     int myDock = findUnitRM(cMyID, cUnitStateAlive, cUnitTypeDock, true);
