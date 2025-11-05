@@ -1910,8 +1910,13 @@ rule buildSecondDock
    int fishCount = kbUnitCount(0, cUnitTypeFish, cUnitStateAlive);
    if (fishCount > 6*(cNumberPlayers-1) && kbResourceGet(cResourceWood) > 150 && kbResourceGet(cResourceGold) > 50)
    {
+	dockThreshold = 1;	//2nd dock.
+	if(kbGetAge() > cAge2 && cvMasterDifficulty >= cDifficultyHard)
+	{
+		dockThreshold = 2;	//3rd dock.
+	}
 	// Make sure we have a dock
-	if(kbUnitCount(cMyID, cUnitTypeDock, cUnitStateAliveOrBuilding) <= 1)
+	if(kbUnitCount(cMyID, cUnitTypeDock, cUnitStateAliveOrBuilding) <= dockThreshold)
 	{
 		int areaID = kbAreaGetClosetArea(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)), cAreaTypeWater);
 		int buildDock = aiPlanCreate("BuildDock2", cPlanBuild);
