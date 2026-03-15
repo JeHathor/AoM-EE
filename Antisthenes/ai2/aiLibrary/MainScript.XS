@@ -8075,6 +8075,10 @@ active
 	}
    }
 
+   if(gMostRecentAttackPlanID < 0 && gAssaultStartTime >= 0)
+   {
+	gAssaultStartTime = -1;
+   }
    bool activeAssault = false;		//Are we still going?
 
    vector baseFront = xsVectorNormalize(kbGetMapCenter()-kbGetTownLocation());
@@ -8093,7 +8097,7 @@ active
 		(milAttack && econAttack && kbGetAge() > cAge3)
 	)
 	&&
-	(xsGetTime() - gAssaultStartTime < 5*60*1000)	//No single attack should be eternal!
+	(gAssaultStartTime < 0 || xsGetTime() - gAssaultStartTime < 5*60*1000)	//No single attack should be eternal!
      )
    {
       xsDisableRule("defendPlanRule");	// Pause the defend plan.
