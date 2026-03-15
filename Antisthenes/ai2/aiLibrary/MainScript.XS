@@ -304,6 +304,7 @@ extern int gNumberMilitaryUnitTypes = 2;
 extern bool gFowardBuildings = false;		//Is this strategy active?
 extern bool gPeriodicAttackTimeOut = false;
 extern int gAssaultStartTime = -1;
+extern int gAssaultTimeLimit = 300000;		//No single attack should be eternal! (5*60*1000)
 
 //==============================================================================
 //Defend Plan Locations.
@@ -8065,10 +8066,13 @@ active
    //Condition C - Defense
    if(milAttack || econAttack)
    {
-	int enemyMilInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeMilitary,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),gMainBaseAreaWallRadius));
-	int enemyTitanInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeAbstractTitan,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),gMainBaseAreaWallRadius));
+	int defenseThreshold = gMainBaseAreaWallRadius * 0.75;
+	if(defenseThreshold > 50) { defenseThreshold=50; }
+	int enemyMilInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeMilitary,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),defenseThreshold));
+	int enemySiegeInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeAbstractSiegeWeapon,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),defenseThreshold));
+	int enemyTitanInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeAbstractTitan,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),defenseThreshold));
 
-	if(enemyMilInBase >= 15 || enemyTitanInBase > 0)
+	if((enemyMilInBase >= 15 && kbGetAge() < cAge4) || enemySiegeInBase >= 8 ||enemyTitanInBase > 0)
 	{
 		milAttack = false;
 		econAttack = false;
@@ -8077,7 +8081,7 @@ active
 
    if(gMostRecentAttackPlanID < 0 && gAssaultStartTime >= 0)
    {
-	gAssaultStartTime = -1;
+	gAssaultStartTime = -1;		//Reset.
    }
    bool activeAssault = false;		//Are we still going?
 
@@ -8097,7 +8101,7 @@ active
 		(milAttack && econAttack && kbGetAge() > cAge3)
 	)
 	&&
-	(gAssaultStartTime < 0 || xsGetTime() - gAssaultStartTime < 5*60*1000)	//No single attack should be eternal!
+	(xsGetTime() - gAssaultStartTime < gAssaultTimeLimit || gAssaultStartTime < 0)
      )
    {
       xsDisableRule("defendPlanRule");	// Pause the defend plan.
