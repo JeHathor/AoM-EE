@@ -5917,6 +5917,8 @@ void age3Handler(int age=2)
       aiPlanSetDesiredPriority(strongBuildPlanID, 90);
 		aiPlanAddUnitType(strongBuildPlanID, getBuilderType(), 1, numBuilders, numBuilders);
       aiPlanSetEscrowID(strongBuildPlanID, cMilitaryEscrowID);
+      if (cMyCulture == cCultureEgyptian)
+      aiPlanSetEscrowID(strongBuildPlanID, cEconomyEscrowID);
       aiPlanSetBaseID(strongBuildPlanID, kbBaseGetMainID(cMyID));
       aiPlanSetActive(strongBuildPlanID);
    }

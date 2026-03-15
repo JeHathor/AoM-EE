@@ -377,7 +377,7 @@ int createBuildSettlementGoal(string name="BUG", int minAge=-1, int maxAge=-1, i
 	aiPlanSetVariableInt(goalID, cGoalPlanUnitTypeID, 1, cUnitTypeHumanSoldier);
    */
    //Escrow ID
-   aiPlanSetEscrowID(goalID, cRootEscrowID);
+   aiPlanSetEscrowID(goalID, cEconomyEscrowID);
    
    //Priority.
    aiPlanSetDesiredPriority(goalID, pri);
