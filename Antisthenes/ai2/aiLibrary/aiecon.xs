@@ -2585,7 +2585,9 @@ rule opportunities
    float currentWood=kbResourceGet(cResourceWood);
    float currentGold=kbResourceGet(cResourceGold);
    //float currentFavor=kbResourceGet(cResourceFavor);
-   if (currentFood > 200 && currentGold > 100 && currentWood > 200 &&
+   if (
+	(currentFood > 200 && currentGold > 100 && currentWood > 200)
+	&& (cvRushBoomSlider > 0) &&
 	(
 	kbGetTechStatus(cTechHandAxe) < cTechStatusResearching
 	||
