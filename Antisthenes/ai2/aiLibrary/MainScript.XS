@@ -5874,7 +5874,7 @@ void age3Handler(int age=2)
 		xsEnableRule("buildOtherBaseBuildings");
    }
 
-      // Build a fortress/palace/whatever...or 4 in DM
+   // Build a fortress/palace/whatever...or 4 in DM
    int buildingType = -1;
    int numBuilders = -1;
    switch(cMyCulture)
@@ -5909,18 +5909,18 @@ void age3Handler(int age=2)
 			numBuilders  = 3;
 		}
    }
-	int strongBuildPlanID=aiPlanCreate("Build Strong Building ", cPlanBuild);
+   int strongBuildPlanID=aiPlanCreate("Build Strong Building ", cPlanBuild);
    if (strongBuildPlanID >= 0)
    {
-      aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanBuildingTypeID, 0, buildingType);
-		aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
-      aiPlanSetDesiredPriority(strongBuildPlanID, 90);
-		aiPlanAddUnitType(strongBuildPlanID, getBuilderType(), 1, numBuilders, numBuilders);
-      aiPlanSetEscrowID(strongBuildPlanID, cMilitaryEscrowID);
-      if (cMyCulture == cCultureEgyptian)
-      aiPlanSetEscrowID(strongBuildPlanID, cEconomyEscrowID);
-      aiPlanSetBaseID(strongBuildPlanID, kbBaseGetMainID(cMyID));
-      aiPlanSetActive(strongBuildPlanID);
+	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanBuildingTypeID, 0, buildingType);
+	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+	aiPlanSetDesiredPriority(strongBuildPlanID, 90);
+	aiPlanAddUnitType(strongBuildPlanID, getBuilderType(), 1, numBuilders, numBuilders);
+	aiPlanSetEscrowID(strongBuildPlanID, cMilitaryEscrowID);
+	if (cMyCulture == cCultureEgyptian)
+	   aiPlanSetEscrowID(strongBuildPlanID, cEconomyEscrowID);
+	aiPlanSetBaseID(strongBuildPlanID, kbBaseGetMainID(cMyID));
+	aiPlanSetActive(strongBuildPlanID);
    }
 
    if (cvMasterDifficulty >= cDifficultyNightmare)
@@ -5933,6 +5933,7 @@ void age3Handler(int age=2)
    }
 
    tradeWithCaravans();    // Call to get it going ASAP.
+
 // Real deathmatch is handled in econ file
    //If we're in deathmatch, immediately build some more houses and build a market.  
    if (gFakeDeathmatch == true && (aiGetGameMode() != cGameModeDeathmatch))
