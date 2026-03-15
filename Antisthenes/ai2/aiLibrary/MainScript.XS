@@ -7943,27 +7943,25 @@ active
       int titanCount = kbUnitCount(cMyID, cUnitTypeAbstractTitan, cUnitStateAlive);
       //Order of attack: Always try to hit the economy!
       if(siegeCount < 3 && titanCount < 1) {
-	aiPlanSetNumberVariableValues(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 13, true);
+	aiPlanSetNumberVariableValues(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 11, true);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 0, cUnitTypeAbstractVillager);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 1, cUnitTypeOxCart);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 2, cUnitTypeAbstractTradeUnit);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 3, cUnitTypeAbstractPharaoh);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 4, cUnitTypeUnit);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 5, cUnitTypeHouse);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 6, cUnitTypeManor);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 7, cUnitTypeAbstractSettlement);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 8, cUnitTypeBuildingsThatShoot);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 9, cUnitTypeMilitaryBuilding);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 10, cUnitTypeAbstractMonument);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 11, cUnitTypeGate);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 12, cUnitTypeBuilding);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 1, cUnitTypeAbstractPharaoh);	//SoO
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 2, cUnitTypeUnit);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 3, cUnitTypeHouse);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 4, cUnitTypeManor);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 5, cUnitTypeAbstractSettlement);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 6, cUnitTypeBuildingsThatShoot);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 7, cUnitTypeMilitaryBuilding);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 8, cUnitTypeAbstractMonument);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 9, cUnitTypeGate);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 10, cUnitTypeBuilding);
       }else{
 	aiPlanSetNumberVariableValues(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 16, true);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 0, cUnitTypeHouse);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 1, cUnitTypeManor);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 2, cUnitTypeAbstractSettlement);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 3, cUnitTypeWonder);
-	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 4, cUnitTypeAbstractPharaoh);
+	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 4, cUnitTypeAbstractPharaoh);	//SoO
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 5, cUnitTypeAbstractVillager);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 6, cUnitTypeMilitary);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 7, cUnitTypeOxCart);
