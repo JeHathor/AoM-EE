@@ -304,7 +304,6 @@ extern int gNumberMilitaryUnitTypes = 2;
 extern bool gFowardBuildings = false;		//Is this strategy active?
 extern bool gPeriodicAttackTimeOut = false;
 extern int gAssaultStartTime = -1;
-extern int gAssaultTimeLimit = 300000;		//No single attack should be eternal! (5*60*1000)
 
 //==============================================================================
 //Defend Plan Locations.
@@ -8088,6 +8087,13 @@ active
    }
    bool activeAssault = false;		//Are we still going?
 
+   //No single attack should be eternal!
+   int assaultTimeLimit = 5*60*1000;
+   if(kbGetAge() > cAge3)
+      assaultTimeLimit = 8*60*1000;
+   if(kbGetAge() > cAge4)
+      assaultTimeLimit = 12*60*1000;
+
    vector baseFront = xsVectorNormalize(kbGetMapCenter()-kbGetTownLocation());
    int mhpTitans = kbUnitCount(mhpID, cUnitTypeAbstractTitan, cUnitStateAlive);
    int myTitans = kbUnitCount(cMyID, cUnitTypeAbstractTitan, cUnitStateAlive);
@@ -8104,7 +8110,7 @@ active
 		(milAttack && econAttack && kbGetAge() > cAge3)
 	)
 	&&
-	(xsGetTime() - gAssaultStartTime < gAssaultTimeLimit || gAssaultStartTime < 0)
+	(xsGetTime() - gAssaultStartTime < assaultTimeLimit || gAssaultStartTime < 0)
      )
    {
       xsDisableRule("defendPlanRule");	// Pause the defend plan.
