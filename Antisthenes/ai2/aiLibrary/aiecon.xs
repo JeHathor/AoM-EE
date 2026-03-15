@@ -2577,6 +2577,10 @@ rule opportunities
    inactive
    runImmediately
 {
+   if (cvRushBoomSlider > 0 && cvMilitaryEconSlider < 0)
+   {
+		return;		// Rush -> AgeUp
+   }
    float currentFood=kbResourceGet(cResourceFood);
    float currentWood=kbResourceGet(cResourceWood);
    float currentGold=kbResourceGet(cResourceGold);
@@ -2589,11 +2593,11 @@ rule opportunities
 	)
       )
 	{
-	  getNextGathererUpgrade();
+	  getNextGathererUpgrade();	// Rush -> Mil
 	}
    else if (currentFood > 500 && currentGold > 300 && currentWood > 300)
    {
-	  getNextGathererUpgrade();
+	  getNextGathererUpgrade();	// Boom -> TC
    }
 }
 
