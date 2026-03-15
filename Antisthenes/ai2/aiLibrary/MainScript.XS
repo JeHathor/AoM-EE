@@ -8065,6 +8065,7 @@ active
 	econAttack = true;	//Let's burn some shit!
    }
 
+/*
    //Condition C - Defense
    if(milAttack || econAttack)
    {
@@ -8074,12 +8075,13 @@ active
 	int enemySiegeInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeAbstractSiegeWeapon,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),defenseThreshold));
 	int enemyTitanInBase = kbUnitQueryExecute(getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeAbstractTitan,kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)),defenseThreshold));
 
-	if((enemyMilInBase >= 15 && kbGetAge() < cAge4) || enemySiegeInBase >= 8 ||enemyTitanInBase > 0)
+	if((enemyMilInBase >= 15 && kbGetAge() < cAge4) || enemySiegeInBase >= 8 || enemyTitanInBase > 0)
 	{
 		milAttack = false;
 		econAttack = false;
 	}
    }
+*/
 
    if(gMostRecentAttackPlanID < 0 && gAssaultStartTime >= 0)
    {
@@ -8087,12 +8089,14 @@ active
    }
    bool activeAssault = false;		//Are we still going?
 
-   //No single attack should be eternal!
+   //No single attack should be eternal! ... Mainly because of limited game memory.
    int assaultTimeLimit = 5*60*1000;
+/*
    if(kbGetAge() > cAge3)
       assaultTimeLimit = 8*60*1000;
    if(kbGetAge() > cAge4)
       assaultTimeLimit = 12*60*1000;
+*/
 
    vector baseFront = xsVectorNormalize(kbGetMapCenter()-kbGetTownLocation());
    int mhpTitans = kbUnitCount(mhpID, cUnitTypeAbstractTitan, cUnitStateAlive);
