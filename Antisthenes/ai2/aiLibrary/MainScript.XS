@@ -8175,18 +8175,23 @@ active
 	kbUnitPickSetMinimumNumberUnits(gLandUPID, minAttackSize);
 	kbUnitPickSetMaximumNumberUnits(gLandUPID, gTargetMilitarySize);
 
+	int maxAttackFrequency = 70;
+	if(kbGetAge() >= 1)
+	{
+	   maxAttackFrequency = 140/kbGetAge();
+	}
 	int attackFrequency = aiPlanGetVariableInt(gLandAttackGoalID, cGoalPlanAttackStartFrequency, 0);
 
 	//Update Attack Goal
 	if(activeAssault)	//Just go?
 	{
-            if(attackFrequency > 4)
+            if(attackFrequency > 4 || attackFrequency > maxAttackFrequency)
 	    {
 		attackFrequency--;
 	    }
 	    aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMinUnitNumber, 0, 3);
 	}else{
-            if(attackFrequency < 70)
+            if(attackFrequency < maxAttackFrequency)
 	    {
 		attackFrequency++;
 	    }
