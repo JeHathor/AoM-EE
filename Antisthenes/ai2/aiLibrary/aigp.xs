@@ -129,6 +129,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  //-- override the default building placement distance so that plenty has some room to cast
 	  //-- it is pretty big..
 	  aiPlanSetVariableFloat(planID, cGodPowerPlanBuildingPlacementDistance, 0, 100.0);
+	  aiPlanSetVariableInt(planID, cGodPowerPlanBPLocationPreference, 0, cBuildingPlacementPreferenceBack);
 	  return (true);
    }
 
