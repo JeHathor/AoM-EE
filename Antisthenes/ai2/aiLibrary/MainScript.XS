@@ -8937,10 +8937,7 @@ rule NavalGoalMonitor
 	 int tempNumberEnemyWarships=kbUnitCount(i, cUnitTypeLogicalTypeNavalMilitary, cUnitStateAlive);
 	 if ( cvMasterDifficulty > cDifficultyModerate )
 	 {
-	    tempNumberEnemyWarships = tempNumberEnemyWarships + kbUnitCount(i, cUnitTypeFishingShipGreek, cUnitStateAlive)/2;
-	    tempNumberEnemyWarships = tempNumberEnemyWarships + kbUnitCount(i, cUnitTypeFishingShipNorse, cUnitStateAlive)/2;
-	    tempNumberEnemyWarships = tempNumberEnemyWarships + kbUnitCount(i, cUnitTypeFishingShipAtlantean, cUnitStateAlive)/2;
-	    tempNumberEnemyWarships = tempNumberEnemyWarships + kbUnitCount(i, cUnitTypeFishingShipEgyptian, cUnitStateAlive)/2;
+	    tempNumberEnemyWarships = tempNumberEnemyWarships + kbUnitCount(i, cUnitTypeUtilityShip, cUnitStateAlive)/2;
 	 }
 	 //int tempNumberEnemyDocks=kbUnitCount(i, cUnitTypeDock, cUnitStateAlive);
 	 if (tempNumberEnemyWarships > numberEnemyWarships)
