@@ -60,10 +60,14 @@ int getEconPop(int pID=cMyID)	//Allow to check for other players too.
    retVal = retVal + kbUnitCount(pID, getGathererType(0), cUnitStateAlive);
 
    retVal = retVal + kbUnitCount(pID, cUnitTypeDwarf, cUnitStateAlive);
+   retVal = retVal + kbUnitCount(pID, cUnitTypeUtilityShip, cUnitStateAlive);
+/*
    retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipGreek, cUnitStateAlive);
    retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipNorse, cUnitStateAlive);
    retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipEgyptian, cUnitStateAlive);
-   retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipAtlantean, cUnitStateAlive);   
+   retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipAtlantean, cUnitStateAlive);
+   retVal = retVal + kbUnitCount(pID, cUnitTypeFishingShipChinese, cUnitStateAlive);
+*/
    retVal = retVal + kbUnitCount(pID, cUnitTypeAbstractTradeUnit, cUnitStateAlive);
    retVal = retVal + kbUnitCount(pID, cUnitTypeOxCart, cUnitStateAlive);
 
