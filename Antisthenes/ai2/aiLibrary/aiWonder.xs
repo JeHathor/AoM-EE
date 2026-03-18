@@ -232,22 +232,22 @@ minInterval 1	// Timing is crucial
       enemyWonderQuery = kbUnitQueryCreate("enemy wonder query");
       if ( enemyWonderQuery == -1)
       {
-         xsDisableSelf();
-         return;
+	 xsDisableSelf();
+	 return;
       }
       kbUnitQuerySetPlayerRelation(enemyWonderQuery, cPlayerRelationEnemy);
       kbUnitQuerySetUnitType(enemyWonderQuery, cUnitTypeWonder);
       kbUnitQuerySetState(enemyWonderQuery, cUnitStateAlive);	// Only completed wonders count
    }
-  
+
    static int allyWonderQuery = -1;
    if (allyWonderQuery < 0)
    {
       allyWonderQuery = kbUnitQueryCreate("ally wonder query");
       if ( allyWonderQuery == -1)
       {
-         xsDisableSelf();
-         return;
+	 xsDisableSelf();
+	 return;
       }
       kbUnitQuerySetPlayerRelation(allyWonderQuery, cPlayerRelationAlly);
       kbUnitQuerySetUnitType(allyWonderQuery, cUnitTypeWonder);
@@ -260,8 +260,8 @@ minInterval 1	// Timing is crucial
       myWonderQuery = kbUnitQueryCreate("my wonder query");
       if ( myWonderQuery == -1)
       {
-         xsDisableSelf();
-         return;
+	 xsDisableSelf();
+	 return;
       }
       kbUnitQuerySetPlayerRelation(myWonderQuery, cPlayerRelationSelf);
       kbUnitQuerySetUnitType(myWonderQuery, cUnitTypeWonder);
@@ -273,89 +273,91 @@ minInterval 1	// Timing is crucial
       kbUnitQueryResetResults(enemyWonderQuery);
       if (kbUnitQueryExecute(enemyWonderQuery) > 0)
       {
-         aiEcho("**** The enemy made the first wonder!");
-         gWonderAttackPlan = true;  //Attack even if we'll have a wonder too!
-         // Create highest-priority defend plan to go kill it
-         wonderID = kbUnitQueryGetResult(enemyWonderQuery, 0);
-         wonderLocation = kbUnitGetPosition(wonderID);
+	 aiEcho("**** The enemy made the first wonder!");
+	 gWonderAttackPlan = true;  //Attack even if we'll have a wonder too!
+	 // Create highest-priority defend plan to go kill it
+	 wonderID = kbUnitQueryGetResult(enemyWonderQuery, 0);
+	 wonderLocation = kbUnitGetPosition(wonderID);
 
-            // Making an attack plan instead, they do a better job of transporting and ignoring some targets en route.
-            gOtherWonderDefendPlan=aiPlanCreate("Enemy wonder attack plan", cPlanAttack);
-            if (gOtherWonderDefendPlan < 0)
-               return;
+	 aiSetMostHatedPlayerID(kbUnitGetOwner(wonderID));
 
-            int n=0;
-            for (n=1; <= cNumberPlayers)
-            {
-               if (kbUnitCount(n, cUnitTypeWonder, cUnitStateAlive) > 0)
-               {
-                  aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanPlayerID, 0, n);
-                  aiEcho("Player "+n+" has the wonder.");
-               }
-            }
+	    // Making an attack plan instead, they do a better job of transporting and ignoring some targets en route.
+	    gOtherWonderDefendPlan=aiPlanCreate("Enemy wonder attack plan", cPlanAttack);
+	    if (gOtherWonderDefendPlan < 0)
+	       return;
 
-            // Specify other continent so that armies will transport
-            aiPlanSetNumberVariableValues( gOtherWonderDefendPlan, cAttackPlanTargetAreaGroups,  1, true);
-            aiEcho("Area group for wonder is "+kbAreaGroupGetIDByPosition(kbUnitGetPosition(wonderID)));
-            aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanTargetAreaGroups, 0, kbAreaGroupGetIDByPosition(kbUnitGetPosition(wonderID)));
-   
-            aiPlanSetVariableVector(gOtherWonderDefendPlan, cAttackPlanGatherPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
-            aiPlanSetVariableFloat(gOtherWonderDefendPlan, cAttackPlanGatherDistance, 0, 200.0);	// Insta-gather, just GO!
+	    int n=0;
+	    for (n=1; <= cNumberPlayers)
+	    {
+	       if (kbUnitCount(n, cUnitTypeWonder, cUnitStateAlive) > 0)
+	       {
+		  aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanPlayerID, 0, n);
+		  aiEcho("Player "+n+" has the wonder.");
+	       }
+	    }
 
-            aiPlanAddUnitType(gOtherWonderDefendPlan, cUnitTypeLogicalTypeLandMilitary, 0, 200, 200);
+	    // Specify other continent so that armies will transport
+	    aiPlanSetNumberVariableValues( gOtherWonderDefendPlan, cAttackPlanTargetAreaGroups,  1, true);
+	    aiEcho("Area group for wonder is "+kbAreaGroupGetIDByPosition(kbUnitGetPosition(wonderID)));
+	    aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanTargetAreaGroups, 0, kbAreaGroupGetIDByPosition(kbUnitGetPosition(wonderID)));
 
-            aiPlanSetInitialPosition(gOtherWonderDefendPlan, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
-            aiPlanSetRequiresAllNeedUnits(gOtherWonderDefendPlan, false);
-            aiPlanSetDesiredPriority(gOtherWonderDefendPlan, 80);
-            aiPlanSetVariableBool(gOtherWonderDefendPlan, cAttackPlanMoveAttack, 0, false);
-            aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanSpecificTargetID, 0, wonderID);
+	    aiPlanSetVariableVector(gOtherWonderDefendPlan, cAttackPlanGatherPoint, 0, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
+	    aiPlanSetVariableFloat(gOtherWonderDefendPlan, cAttackPlanGatherDistance, 0, 200.0);	// Insta-gather, just GO!
 
-            aiPlanSetActive(gOtherWonderDefendPlan);
+	    aiPlanAddUnitType(gOtherWonderDefendPlan, cUnitTypeLogicalTypeLandMilitary, 0, 200, 200);
+
+	    aiPlanSetInitialPosition(gOtherWonderDefendPlan, kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID)));
+	    aiPlanSetRequiresAllNeedUnits(gOtherWonderDefendPlan, false);
+	    aiPlanSetDesiredPriority(gOtherWonderDefendPlan, 80);
+	    aiPlanSetVariableBool(gOtherWonderDefendPlan, cAttackPlanMoveAttack, 0, false);
+	    aiPlanSetVariableInt(gOtherWonderDefendPlan, cAttackPlanSpecificTargetID, 0, wonderID);
+
+	    aiPlanSetActive(gOtherWonderDefendPlan);
       }
       else
       {
-         kbUnitQueryResetResults(myWonderQuery);
-         if (kbUnitQueryExecute(myWonderQuery) > 0)	// I win, quit.
-         {
-            aiEcho("**** I made the first wonder!");
-            xsDisableSelf();
-            return;
-         }
-         else
-         {
-            kbUnitQueryResetResults(allyWonderQuery);
-            if (kbUnitQueryExecute(allyWonderQuery) > 0)
-            {
-               aiEcho("**** An ally made the first wonder!");
-               // Create highest-priority defend plan to go protect it
-               wonderID = kbUnitQueryGetResult(allyWonderQuery, 0);
-               wonderLocation = kbUnitGetPosition(wonderID);
-               if ( kbAreaGroupGetIDByPosition(wonderLocation) == kbAreaGroupGetIDByPosition(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID))) )
-               {	// It's on my continent, go help
-                  gOtherWonderDefendPlan = aiPlanCreate("Ally Wonder Defend Plan", cPlanDefend);		// Uses "enemy" plan for allies, too.
-                  if (gOtherWonderDefendPlan >= 0)
-                  {
-                     aiPlanAddUnitType(gOtherWonderDefendPlan, cUnitTypeMilitary, 200, 200, 200);	// All mil units
-                     aiPlanSetDesiredPriority(gOtherWonderDefendPlan, 98);		// Uber-plan, except for norse wonder-build plan
-                     aiPlanSetVariableVector(gOtherWonderDefendPlan, cDefendPlanDefendPoint, 0, wonderLocation);
-                     aiPlanSetVariableFloat(gOtherWonderDefendPlan, cDefendPlanEngageRange, 0, 50.0);
-                     aiPlanSetVariableBool(gOtherWonderDefendPlan, cDefendPlanPatrol, 0, false);
+	 kbUnitQueryResetResults(myWonderQuery);
+	 if (kbUnitQueryExecute(myWonderQuery) > 0)	// I win, quit.
+	 {
+	    aiEcho("**** I made the first wonder!");
+	    xsDisableSelf();
+	    return;
+	 }
+	 else
+	 {
+	    kbUnitQueryResetResults(allyWonderQuery);
+	    if (kbUnitQueryExecute(allyWonderQuery) > 0)
+	    {
+	       aiEcho("**** An ally made the first wonder!");
+	       // Create highest-priority defend plan to go protect it
+	       wonderID = kbUnitQueryGetResult(allyWonderQuery, 0);
+	       wonderLocation = kbUnitGetPosition(wonderID);
+	       if ( kbAreaGroupGetIDByPosition(wonderLocation) == kbAreaGroupGetIDByPosition(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID))) )
+	       {	// It's on my continent, go help
+		  gOtherWonderDefendPlan = aiPlanCreate("Ally Wonder Defend Plan", cPlanDefend);		// Uses "enemy" plan for allies, too.
+		  if (gOtherWonderDefendPlan >= 0)
+		  {
+		     aiPlanAddUnitType(gOtherWonderDefendPlan, cUnitTypeMilitary, 200, 200, 200);	// All mil units
+		     aiPlanSetDesiredPriority(gOtherWonderDefendPlan, 98);		// Uber-plan, except for norse wonder-build plan
+		     aiPlanSetVariableVector(gOtherWonderDefendPlan, cDefendPlanDefendPoint, 0, wonderLocation);
+		     aiPlanSetVariableFloat(gOtherWonderDefendPlan, cDefendPlanEngageRange, 0, 50.0);
+		     aiPlanSetVariableBool(gOtherWonderDefendPlan, cDefendPlanPatrol, 0, false);
 
-                     aiPlanSetVariableFloat(gOtherWonderDefendPlan, cDefendPlanGatherDistance, 0, 40.0);
-                     aiPlanSetInitialPosition(gOtherWonderDefendPlan, wonderLocation);
-                     aiPlanSetUnitStance(gOtherWonderDefendPlan, cUnitStanceDefensive);
+		     aiPlanSetVariableFloat(gOtherWonderDefendPlan, cDefendPlanGatherDistance, 0, 40.0);
+		     aiPlanSetInitialPosition(gOtherWonderDefendPlan, wonderLocation);
+		     aiPlanSetUnitStance(gOtherWonderDefendPlan, cUnitStanceDefensive);
 
-                     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanRefreshFrequency, 0, 5);
-                     aiPlanSetNumberVariableValues(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 2, true);
-                     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 0, cUnitTypeUnit);
-                     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 1, cUnitTypeBuilding);
+		     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanRefreshFrequency, 0, 5);
+		     aiPlanSetNumberVariableValues(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 2, true);
+		     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 0, cUnitTypeUnit);
+		     aiPlanSetVariableInt(gOtherWonderDefendPlan, cDefendPlanAttackTypeID, 1, cUnitTypeBuilding);
 
-                     aiPlanSetActive(gOtherWonderDefendPlan); 
-                     aiEcho("Creating enemy wonder defend plan");
-                  }
-               }
-            }
-         }
+		     aiPlanSetActive(gOtherWonderDefendPlan); 
+		     aiEcho("Creating enemy wonder defend plan");
+		  }
+	       }
+	    }
+	 }
       }
    }
    else  // A wonder was built...if it's down, kill the uber-plan
@@ -363,11 +365,11 @@ minInterval 1	// Timing is crucial
       aiPlanSetNoMoreUnits(gOtherWonderDefendPlan, false);  // Make sure the enemy wonder 'defend' plan stays open
       if (kbUnitGetCurrentHitpoints(wonderID) <= 0)
       {
-         aiPlanDestroy(gOtherWonderDefendPlan);
+	 aiPlanDestroy(gOtherWonderDefendPlan);
 	gWonderAttackPlan = false;
-         xsDisableSelf();
-         aiEcho("**** Wonder "+wonderID+" has been destroyed!");
-         xsEnableRule("watchForFirstWonderStart");
+	 xsDisableSelf();
+	 aiEcho("**** Wonder "+wonderID+" has been destroyed!");
+	 xsEnableRule("watchForFirstWonderStart");
 	xsSetRuleMinInterval("watchForFirstWonderStart", 45);
       }
    }
