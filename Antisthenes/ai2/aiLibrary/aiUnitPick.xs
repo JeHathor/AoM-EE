@@ -569,7 +569,9 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 1.0);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.7);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.3);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 1.0);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 0.9);
@@ -581,8 +583,10 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.7);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.3);
 
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.9);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.6);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.5);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 1.0);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 1.0);
@@ -594,6 +598,8 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 0.6);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.5);
 
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.5);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.4);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.3);
 
@@ -609,10 +615,13 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	 {
 	    printEcho("Executing case 0, upChoice = "+upChoice);	//vs. Inf
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 1.0);
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.5);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.6);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.2);
 
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.5);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.3);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 0.8);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 0.9);
@@ -624,7 +633,10 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.7);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.3);
 
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.9);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.4);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 0.8);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 1.0);
@@ -636,7 +648,10 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 0.6);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.5);
 
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.3);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.4);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.3);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 0.8);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 0.9);
@@ -653,7 +668,10 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.5);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.2);
 
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.7);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.3);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 1.0);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 0.9);
@@ -661,11 +679,14 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	 else if (upChoice == 1)
 	 {
 	    printEcho("Executing case 1, upChoice = "+upChoice);	//vs. Arc
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 0.8);
-	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.7);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.9);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 0.7);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractInfantry, 0.3);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.6);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.4);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 1.0);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 1.0);
@@ -677,7 +698,10 @@ void updateUnitPreference(int upID=-1, int upChoice=-1)
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractArcher, 0.6);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractCavalry, 0.5);
 
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMaceman, 0.8);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeChieroballista, 0.4);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeJavelinCavalry, 0.3);
+	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeTridentSoldier, 0.2);
 
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeMythUnit, 1.0);
 	    kbUnitPickSetPreferenceFactor(upID, cUnitTypeAbstractSiegeWeapon, 0.9);
