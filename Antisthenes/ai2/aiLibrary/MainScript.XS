@@ -7940,9 +7940,11 @@ active
 	microArmyVSArmy(gMostRecentAttackPlanID);	//fight or retreat?
 
       int siegeCount = kbUnitCount(cMyID, cUnitTypeAbstractSiegeWeapon, cUnitStateAlive);
+      siegeCount = siegeCount + (kbUnitCount(cMyID, cUnitTypeMythUnitSiege, cUnitStateAlive) * 0.5);
       int titanCount = kbUnitCount(cMyID, cUnitTypeAbstractTitan, cUnitStateAlive);
+      int unitCount = kbUnitCount(cMyID, cUnitTypeLogicalTypeLandMilitary, cUnitStateAlive);
       //Order of attack: Always try to hit the economy!
-      if(siegeCount < 3 && titanCount < 1) {
+      if(siegeCount < 3 && titanCount < 1 && unitCount < 24) {
 	aiPlanSetNumberVariableValues(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 11, true);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 0, cUnitTypeAbstractVillager);
 	aiPlanSetVariableInt(gMostRecentAttackPlanID, cAttackPlanTargetTypeID, 1, cUnitTypeAbstractPharaoh);	//SoO
