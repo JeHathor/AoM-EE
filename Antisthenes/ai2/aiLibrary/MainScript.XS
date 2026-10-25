@@ -1456,7 +1456,8 @@ rule updateTargetPop
 	econEscrow = econEscrow - 0.05;
     }
 
-    civPopTarget = 60 - (cvRushBoomSlider*5.99);	// +/- 5
+    if(kbGetAge() == cAge1) {civPopTarget = 30;} else {civPopTarget = 60;}
+    civPopTarget = civPopTarget - (cvRushBoomSlider*5.99);	// +/- 5
     if (gGlutRatio > 1.0)
     {
 	civPopTarget = civPopTarget / gGlutRatio;
