@@ -1393,8 +1393,8 @@ rule updateTargetPop
   {
 	gNumberMilitaryUnitTypes = 1;
 
-	civPopTarget = 25;
-	milPopTarget = 0;
+	//civPopTarget = 25;
+	//milPopTarget = 0;
 
 	econPercent = 1.00;
 	econEscrow = 1.00;
@@ -1499,6 +1499,12 @@ rule updateTargetPop
     kbUnitPickSetMinimumPop(gLandUPID, milPopTarget*.5);
     kbUnitPickSetMaximumPop(gLandUPID, milPopTarget*.75);
 
+    if (kbGetAge() == cAge1) {
+	int currentPop = getEconPop(cMyID);
+	if(civPopTarget < currentPop) {
+		civPopTarget = currentPop;
+	}
+    }
     // For econ purist, do lesser of 50% econ boost or 50% mil cut. (For mil, vice versa)
     float econAdjust = -.5 * cvMilitaryEconSlider;
 
