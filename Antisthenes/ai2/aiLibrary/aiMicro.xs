@@ -21,6 +21,7 @@ int findUnitRM(int playerID=0, int state=cUnitStateAny, int unitTypeID=-1, bool 
 	{
 	   if(playerID < 0)	//Whoever owns it (Any)
 	   {
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, cPlayerRelationAny);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -64,6 +65,7 @@ int findUnitByIndex(int playerID=0, int state=cUnitStateAny, int unitTypeID=-1, 
 	{
 	   if(playerID < 0)	//Whoever owns it (Any)
 	   {
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, cPlayerRelationAny);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -96,6 +98,7 @@ int getUnitsAtLocQID(int playerID=0, int state=cUnitStateAny, int unitTypeID=-1,
 	{
 	   if(playerID < 0)	//Whoever owns it (Any)
 	   {
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, cPlayerRelationAny);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -164,7 +167,7 @@ int findWeakestUnit(int playerID=0, int state=cUnitStateAny, int unitTypeID=-1, 
 	{
 	   if(playerID < 0)	//-1 for playerRelation
 	   {
-		//Whatever specified... (at least in theory)
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, playerRelation);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -212,7 +215,7 @@ int findWeakestUnitInRadius(int puid=-1, int playerID=0, int state=cUnitStateAny
 	{
 	   if(playerID < 0)	//-1 for playerRelation
 	   {
-		//Whatever specified...
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, playerRelation);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -271,7 +274,7 @@ int findClosestRelTo(int puid=-1, int playerID=0, int state=cUnitStateAny, int u
 	{
 	   if(playerID < 0)	//-1 for playerRelation
 	   {
-		//Whatever specified... (at least in theory)
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, playerRelation);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
@@ -331,7 +334,7 @@ int findFurthestRelTo(int puid=-1, int playerID=0, int state=cUnitStateAny, int 
 	{
 	   if(playerID < 0)	//-1 for playerRelation
 	   {
-		//Whatever specified... (at least in theory)
+		kbUnitQuerySetPlayerID(unitQueryID, -1);	//Reset!
 		kbUnitQuerySetPlayerRelation(unitQueryID, playerRelation);
 	   }else{
 		kbUnitQuerySetPlayerID(unitQueryID, playerID);
