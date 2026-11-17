@@ -120,6 +120,7 @@ int createSimpleAttackGoal(string name="BUG", int attackPlayerID=-1,
 	}
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 6, cUnitTypeArmory);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 7, cUnitTypeTemple);
+	break;
       }
       case cCultureEgyptian:
       {
@@ -132,6 +133,7 @@ int createSimpleAttackGoal(string name="BUG", int attackPlayerID=-1,
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 5, cUnitTypeBarracks);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 6, cUnitTypeArmory);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 7, cUnitTypeTemple);
+	break;
       }
       case cCultureNorse:
       {
@@ -145,6 +147,7 @@ int createSimpleAttackGoal(string name="BUG", int attackPlayerID=-1,
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 3, cUnitTypeArmory);
 	}
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 4, cUnitTypeTemple);
+	break;
       }
       case cCultureAtlantean:
       {
@@ -155,6 +158,7 @@ int createSimpleAttackGoal(string name="BUG", int attackPlayerID=-1,
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 3, cUnitTypeBarracksAtlantean);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 4, cUnitTypeArmory);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 5, cUnitTypeTemple);
+	break;
       }
       case cCultureChinese:
       {
@@ -165,6 +169,7 @@ int createSimpleAttackGoal(string name="BUG", int attackPlayerID=-1,
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 3, cUnitTypeStableChinese);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 4, cUnitTypeArmory);
 	aiPlanSetVariableInt(goalID, cGoalPlanUpgradeBuilding, 5, cUnitTypeTemple);
+	break;
       }
    }
    }else{
