@@ -10030,15 +10030,16 @@ rule spotAgeUpgrades
 {
    // If my current age is higher than the last upgrade I remember...do the handler
 
-   if ( gLastAgeHandled < kbGetAge() )
+   int currentAge = kbGetAge();
+   if ( gLastAgeHandled < currentAge )
    {
-      if (gLastAgeHandled == cAge1)
+      if (gLastAgeHandled == cAge1 && currentAge > cAge1)
 	 age2Handler();
-      if (gLastAgeHandled == cAge2)
+      if (gLastAgeHandled == cAge2 && currentAge > cAge2)
 	 age3Handler();
-      if (gLastAgeHandled == cAge3)
+      if (gLastAgeHandled == cAge3 && currentAge > cAge3)
 	 age4Handler();
-      if (gLastAgeHandled == cAge4)
+      if (gLastAgeHandled == cAge4 && currentAge > cAge4)
 	 age5Handler();
 
    }
