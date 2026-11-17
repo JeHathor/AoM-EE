@@ -644,7 +644,7 @@ inactive
 	int dropsiteID = findClosestRelTo(villagerID, 0, cUnitStateAliveOrBuilding, buildingTypeID);
 	if(dropsiteID < 0)
 	{
-		dropsiteID = findUnit(cUnitTypeAbstractSettlement);
+		dropsiteID = findUnit(cMyID, cUnitStateAlive, cUnitTypeAbstractSettlement);
 	}
 	int wipDropsites = kbUnitCount(cMyID, buildingTypeID, cUnitStateBuilding);
 	if(calcDistanceToUnit(dropsiteID,resourceID)>15 && wipDropsites<1)	//justified to build a new one

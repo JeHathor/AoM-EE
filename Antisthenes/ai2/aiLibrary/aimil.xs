@@ -459,7 +459,10 @@ vector setMilitaryGatherPointAllBases(vector location=cInvalidVector)
    int numberFound = kbUnitQueryExecute(baseQueryID);
    for (i=0; < numberFound)
    {
-	kbBaseSetMilitaryGatherPoint(cMyID, kbUnitQueryGetResult(baseQueryID, i), location);
+	int settlementID = kbUnitQueryGetResult(baseQueryID, i);
+	int settlementBaseID = kbUnitGetBaseID(settlementID);
+	if (settlementBaseID >= 0)
+	   kbBaseSetMilitaryGatherPoint(cMyID, settlementBaseID, location);
    }
    kbBaseSetMilitaryGatherPoint(cMyID, kbBaseGetMainID(cMyID), location);
    return(location);

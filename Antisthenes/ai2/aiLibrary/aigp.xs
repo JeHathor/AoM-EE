@@ -53,7 +53,7 @@ vector findHuntableInfluence()
    kbUnitQueryResetResults(queryID);
    kbUnitQuerySetPlayerID(queryID, 0);
    kbUnitQuerySetUnitType(queryID, cUnitTypeHuntable);
-   kbUnitQuerySetState(cUnitStateAlive);
+   kbUnitQuerySetState(queryID, cUnitStateAlive);
    int numberFound=kbUnitQueryExecute(queryID);
 
    for (i=0; < numberFound)
@@ -164,7 +164,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerID(queryID, 0);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeHuntable);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive + cUnitStateDead);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryPlayerID, 0, 0);
@@ -547,7 +547,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerID(queryID, aiGetMostHatedPlayerID());
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeMilitary);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryPlayerID, 0, aiGetMostHatedPlayerID());
@@ -572,9 +572,9 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 		 return (false);
 
 	  kbUnitQueryResetData(queryID);
-	  kbUnitQuerySetPlayerRelation(cPlayerRelationEnemy);
+	  kbUnitQuerySetPlayerRelation(queryID, cPlayerRelationEnemy);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeAbstractVillager);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryPlayerRelation, 0, cPlayerRelationEnemy);
@@ -599,7 +599,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerID(queryID, cMyID);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypePharaoh);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanCount, 0, 1);
@@ -670,7 +670,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerID(queryID, cMyID);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeFarm);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryPlayerID, 0, cMyID);
@@ -731,7 +731,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerID(queryID, cMyID);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeAbstractVillager);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanCount, 0, 50);
@@ -785,7 +785,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerRelation(queryID, cPlayerRelationEnemy);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeLogicalTypeValidDeconstructionTarget);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	//  aiPlanSetVariableInt(planID, cGodPowerPlanQueryPlayerID, 0, aiGetMostHatedPlayerID());
@@ -878,7 +878,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 	  kbUnitQueryResetData(queryID);
 	  kbUnitQuerySetPlayerRelation(queryID, cPlayerRelationEnemy);
 	  kbUnitQuerySetUnitType(queryID, cUnitTypeMilitary);
-	  kbUnitQuerySetState(cUnitStateAlive);
+	  kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 	  aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 	  aiPlanSetVariableInt(planID, cGodPowerPlanCount, 0, 1);
@@ -1021,7 +1021,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 		kbUnitQueryResetData(queryID);
 		kbUnitQuerySetPlayerID(queryID, cMyID);
 		kbUnitQuerySetUnitType(queryID, cUnitTypeAbstractVillager);
-		kbUnitQuerySetState(cUnitStateAlive);
+		kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 		aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 		aiPlanSetVariableInt(planID, cGodPowerPlanCount, 0, 48);
@@ -1072,7 +1072,7 @@ bool setupGodPowerPlan(int planID = -1, int powerProtoID = -1)
 		kbUnitQueryResetData(queryID);
 		kbUnitQuerySetPlayerID(queryID, cMyID);
 		kbUnitQuerySetUnitType(queryID, cUnitTypeLogicalTypeUnitsNotBuildings);
-		kbUnitQuerySetState(cUnitStateAlive);
+		kbUnitQuerySetState(queryID, cUnitStateAlive);
 
 		aiPlanSetVariableInt(planID, cGodPowerPlanQueryID, 0, queryID);
 		aiPlanSetVariableInt(planID, cGodPowerPlanCount, 0, 70);
@@ -1362,7 +1362,7 @@ rule rCeaseFire
    }
 
    //Else, setup the query data.
-   kbUnitQuerySetPlayerRelation(cPlayerRelationAlly);
+   kbUnitQuerySetPlayerRelation(allyQueryID, cPlayerRelationAlly);
    kbUnitQuerySetUnitType(allyQueryID, cUnitTypeMilitary);
    kbUnitQuerySetState(allyQueryID, cUnitStateAlive);
    //Reset the results.
@@ -1528,37 +1528,37 @@ inactive
 			// Things we should speed up
 			if(kbUnitIsType(buildingID,cUnitTypeEconomicBuilding))
 			{
-				if(canAffordSpeedUpConstruction(queryID,0,cEconomyEscrowID))
+				if(canAffordSpeedUpConstruction(queryID,i,cEconomyEscrowID))
 				{
-					kbBuildingPushSpeedUpConstructionButton(queryID, 0, cEconomyEscrowID);
+					kbBuildingPushSpeedUpConstructionButton(queryID, i, cEconomyEscrowID);
 				}
 			}
 			else if(kbUnitIsType(buildingID,cUnitTypeAbstractTemple))
 			{
-				if(canAffordSpeedUpConstruction(queryID,0,cEconomyEscrowID))
+				if(canAffordSpeedUpConstruction(queryID,i,cEconomyEscrowID))
 				{
-					kbBuildingPushSpeedUpConstructionButton(queryID, 0, cEconomyEscrowID);
+					kbBuildingPushSpeedUpConstructionButton(queryID, i, cEconomyEscrowID);
 				}
 			}
 			else if(kbUnitIsType(buildingID,cUnitTypeDropsite))
 			{
-				if(canAffordSpeedUpConstruction(queryID,0,cEconomyEscrowID))
+				if(canAffordSpeedUpConstruction(queryID,i,cEconomyEscrowID))
 				{
-					kbBuildingPushSpeedUpConstructionButton(queryID, 0, cEconomyEscrowID);
+					kbBuildingPushSpeedUpConstructionButton(queryID, i, cEconomyEscrowID);
 				}
 			}
 			else if(kbUnitIsType(buildingID,cUnitTypeAbstractDock))
 			{
-				if(canAffordSpeedUpConstruction(queryID,0,cEconomyEscrowID))
+				if(canAffordSpeedUpConstruction(queryID,i,cEconomyEscrowID))
 				{
-					kbBuildingPushSpeedUpConstructionButton(queryID, 0, cEconomyEscrowID);
+					kbBuildingPushSpeedUpConstructionButton(queryID, i, cEconomyEscrowID);
 				}
 			}
 			else if(kbUnitIsType(buildingID,cUnitTypeBuilding)&&kbGetAge()>cAge1)
 			{
-				if(canAffordSpeedUpConstruction(queryID,0,cMilitaryEscrowID))
+				if(canAffordSpeedUpConstruction(queryID,i,cMilitaryEscrowID))
 				{
-					kbBuildingPushSpeedUpConstructionButton(queryID, 0, cMilitaryEscrowID);
+					kbBuildingPushSpeedUpConstructionButton(queryID, i, cMilitaryEscrowID);
 				}
 			}
 		}
@@ -1598,7 +1598,7 @@ inactive
 		deadQuery = kbUnitQueryCreate("Dead Villager Query");
 		kbUnitQuerySetPlayerID(deadQuery, cMyID);
 		kbUnitQuerySetUnitType(deadQuery, cUnitTypeVillagerChineseDeadReplacement);
-		kbUnitQuerySetState(deadQuery, cUnitStateAny);
+		kbUnitQuerySetState(deadQuery, cUnitStateDead);
 	}
 	kbUnitQueryResetResults(deadQuery);
 	if(deadNearbyQuery == -1)
@@ -1606,13 +1606,12 @@ inactive
 		deadNearbyQuery = kbUnitQueryCreate("Dead Nearby Villager Query");
 		kbUnitQuerySetPlayerID(deadNearbyQuery, cMyID);
 		kbUnitQuerySetUnitType(deadNearbyQuery, cUnitTypeVillagerChineseDeadReplacement);
-		kbUnitQuerySetState(deadNearbyQuery, cUnitStateAny);
+		kbUnitQuerySetState(deadNearbyQuery, cUnitStateDead);
 	}
 	int numDead = kbUnitQueryExecute(deadQuery);
 	if(enemyQuery == -1)
 	{
 		enemyQuery = kbUnitQueryCreate("Enemy Army Query");
-		kbUnitQuerySetPlayerID(enemyQuery, cMyID);
 		kbUnitQuerySetPlayerRelation(enemyQuery, cPlayerRelationEnemy);
 		kbUnitQuerySetUnitType(enemyQuery, cUnitTypeMilitary);
 		kbUnitQuerySetState(enemyQuery, cUnitStateAlive);

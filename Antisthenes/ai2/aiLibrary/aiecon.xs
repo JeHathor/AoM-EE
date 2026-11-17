@@ -1883,7 +1883,7 @@ rule fishing
 		aiPlanSetDesiredPriority(waterExploreID, 100);
 	  aiPlanSetVariableBool(waterExploreID, cExplorePlanDoLoops, 0, false);
 	  aiPlanSetActive(waterExploreID);
-	  aiPlanSetEscrowID(cEconomyEscrowID);
+	  aiPlanSetEscrowID(waterExploreID, cEconomyEscrowID);
 	}
 	xsDisableSelf();
    }
@@ -2186,8 +2186,10 @@ rule buildHouse
 		else
 		{
 		    //right
-		    x = z * 10;
-		    z = x * (-10);
+		    float tX = x;
+		    float tZ = z;
+		    x = tZ * 10;
+		    z = tX * (-10);
 		}
 
 	  backVector = xsVectorSetX(backVector, x);
@@ -2260,7 +2262,7 @@ void aiTaskBuildSettlement(void)
 
    if(kbUnitCount(cMyID, cUnitTypeAbstractSettlement, cUnitStateBuilding) < 1)
    {
-	tcID = findClosestRelTo(kbBaseGetMainID(cMyID), 0, cUnitStateAlive, cUnitTypeAbstractSettlement);
+	tcID = findClosestRelTo(gMainBaseID, 0, cUnitStateAlive, cUnitTypeAbstractSettlement);
 	builderID = findClosestRelTo(tcID, cMyID, cUnitStateAlive, kbTechTreeGetUnitIDTypeByFunctionIndex(cUnitFunctionBuilder, 0));
 	vector location = kbUnitGetPosition(tcID);
 	aiTaskUnitBuild(builderID,cUnitTypeSettlementLevel1,location);

@@ -523,7 +523,7 @@ void microHeroesVsMyth(void)		//Type: AttackScript
 	}
 
    int mhpUnitID = findClosestRelTo(myUnitID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeMythUnit);
-   if(mhpUnitID < -1) { return; }	//Nothing found?
+   if(mhpUnitID < 0) { return; }	//Nothing found?
 
    bool isFlying = false;
    if(kbUnitIsType(mhpUnitID, cUnitTypeFlyingUnit))
@@ -562,7 +562,7 @@ void microTitanVsBuildings(void)	//Type: AttackScript
    {
 
    int mhpUnitID = findClosestRelTo(myUnitID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeBuilding);
-   if(mhpUnitID < -1) { return; }	//Nothing found?
+   if(mhpUnitID < 0) { return; }	//Nothing found?
 
    //nearest target is close enough?
    if(calcDistanceToUnit(myUnitID,mhpUnitID) < 5)
@@ -644,6 +644,8 @@ void microSiegeVsBuildings(void)	//Type: AttackScript
    {
 
    int mhpBuildingID = findClosestRelTo(myUnitID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeBuilding);
+   if (mhpBuildingID < 0)
+      return;
 
    //Is it a reasonable target?
    bool conditionA = false;
@@ -668,7 +670,7 @@ void microSiegeVsBuildings(void)	//Type: AttackScript
 	||
 	kbUnitIsType(mhpBuildingID, cUnitTypeWallLong)
 	||
-	kbUnitIsType(cUnitTypeMilitaryBuilding)
+	kbUnitIsType(mhpBuildingID, cUnitTypeMilitaryBuilding)
       )
    {
 	conditionA = true;
@@ -743,7 +745,7 @@ void microAntiSiegeVsSiege(void)	//Type: AttackScript
    {
 
    int mhpUnitID = findClosestRelTo(myUnitID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeAbstractSiegeWeapon);
-   if(mhpUnitID < -1){ return; }	//Nothing found?
+   if(mhpUnitID < 0){ return; }	//Nothing found?
 
    //nearest target is close enough?
    if(calcDistanceToUnit(myUnitID,mhpUnitID) < counterDistance)
@@ -788,7 +790,7 @@ void microAntiArcherVsArcher(void)	//Type: AttackScript
    {
 
    int mhpUnitID = findClosestRelTo(myUnitID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeAbstractArcher);
-   if(mhpUnitID < -1){ return; }	//Nothing found?
+   if(mhpUnitID < 0){ return; }	//Nothing found?
 
    //nearest target is close enough?
    if(calcDistanceToUnit(myUnitID,mhpUnitID) < counterDistance)
@@ -1740,7 +1742,9 @@ void microArmyVSArmy(int planID=-1)	//@attackMonitor
 	int mhpUnitList = getUnitsAtLocQID(mhpID,cUnitStateAlive,cUnitTypeMilitary,currentPlanPosition,30);
 	int mhpUnitCount = kbUnitQueryExecute(mhpUnitList);
 
-	int mhpUnitID = findClosestRelTo(planUnit, 0, cUnitStateAlive, cUnitTypeMilitary);
+	int mhpUnitID = findClosestRelTo(planUnit, mhpID, cUnitStateAlive, cUnitTypeMilitary);
+	if (mhpUnitID < 0)
+		return;
 	vector path = xsVectorNormalize(kbUnitGetPosition(mhpUnitID)-currentPlanPosition)*20;
 
 	if(mhpUnitCount*0.8 > myUnitCount)	//enemy has more units on the field

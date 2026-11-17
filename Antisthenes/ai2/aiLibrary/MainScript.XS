@@ -1162,7 +1162,8 @@ bool createSimpleBuildPlan(int puid=-1, int number=1, int pri=100,
 
       aiPlanSetVariableInt(planID, cBuildPlanBuildingTypeID, 0, puid);
       //Border layers.
-      aiPlanSetVariableInt(planID, cBuildPlanNumAreaBorderLayers, 2, kbAreaGetIDByPosition(kbBaseGetLocation(cMyID, baseID)) );
+      aiPlanSetVariableInt(planID, cBuildPlanAreaID, 0, kbAreaGetIDByPosition(kbBaseGetLocation(cMyID, baseID)) );
+       aiPlanSetVariableInt(planID, cBuildPlanNumAreaBorderLayers, 0, 2);
       //Priority.
       aiPlanSetDesiredPriority(planID, pri);
       //Mil vs. Econ.
@@ -4609,7 +4610,9 @@ minInterval 1
    int numberFound=kbUnitQueryExecute(builderQuery);
    for(i=0; < numberFound)
    {
-	aiTaskUnitMove(i,settleLoc);	//Go there!
+	int builderID = kbUnitQueryGetResult(builderQuery, i);
+	if (builderID >= 0)
+	   aiTaskUnitMove(builderID, settleLoc);	//Go there!
    }
 
    printEcho("Creating simple build plan");
@@ -5001,7 +5004,8 @@ void age2Handler(int age=1)
       if (longhousePlanID >= 0)
       {
 	 aiPlanSetVariableInt(longhousePlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeLonghouse);
-		   aiPlanSetVariableInt(longhousePlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+		   aiPlanSetVariableInt(longhousePlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+       aiPlanSetVariableInt(longhousePlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	 aiPlanSetDesiredPriority(longhousePlanID, 100);
 		   aiPlanAddUnitType(longhousePlanID, getBuilderType(), gBuildersPerHouse, gBuildersPerHouse, gBuildersPerHouse);
 	 aiPlanSetEscrowID(longhousePlanID, cMilitaryEscrowID);
@@ -5043,7 +5047,8 @@ void age2Handler(int age=1)
       if (guildPlanID >= 0)
       {
 	 aiPlanSetVariableInt(guildPlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeGuild);
-		   aiPlanSetVariableInt(guildPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+		   aiPlanSetVariableInt(guildPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+	   aiPlanSetVariableInt(guildPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	 aiPlanSetDesiredPriority(guildPlanID, 100);
 		   aiPlanAddUnitType(guildPlanID, getBuilderType(), gBuildersPerHouse, gBuildersPerHouse, gBuildersPerHouse);
 	 aiPlanSetEscrowID(guildPlanID, cEconomyEscrowID);
@@ -5055,7 +5060,8 @@ void age2Handler(int age=1)
       if (barracksPlanID >= 0)
       {
 	 aiPlanSetVariableInt(barracksPlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeCounterBuilding);
-		   aiPlanSetVariableInt(barracksPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+		   aiPlanSetVariableInt(barracksPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+	   aiPlanSetVariableInt(barracksPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	 aiPlanSetDesiredPriority(barracksPlanID, 80);
 		   aiPlanAddUnitType(barracksPlanID, getBuilderType(), gBuildersPerHouse, gBuildersPerHouse, gBuildersPerHouse);
 	 aiPlanSetEscrowID(barracksPlanID, cMilitaryEscrowID);
@@ -5216,7 +5222,8 @@ minInterval 10
    if (marketPlanID >= 0)
    {
       aiPlanSetVariableInt(marketPlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeMarket);
-      aiPlanSetVariableInt(marketPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+      aiPlanSetVariableInt(marketPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+       aiPlanSetVariableInt(marketPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
       aiPlanSetDesiredPriority(marketPlanID, 100);
       aiPlanAddUnitType(marketPlanID, getBuilderType(), 1, 1, 1);
       aiPlanSetEscrowID(marketPlanID, cEconomyEscrowID);
@@ -5825,7 +5832,8 @@ void age3Handler(int age=2)
 	 if (siegeCampPlanID >= 0)
 	 {
 	    aiPlanSetVariableInt(siegeCampPlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeSiegeCamp);
-		      aiPlanSetVariableInt(siegeCampPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+		      aiPlanSetVariableInt(siegeCampPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+	      aiPlanSetVariableInt(siegeCampPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	    aiPlanSetDesiredPriority(siegeCampPlanID, 100);
 		      aiPlanAddUnitType(siegeCampPlanID, getBuilderType(), 1, 1, 1);
 	    aiPlanSetEscrowID(siegeCampPlanID, cMilitaryEscrowID);
@@ -5919,7 +5927,8 @@ void age3Handler(int age=2)
    if (strongBuildPlanID >= 0)
    {
 	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanBuildingTypeID, 0, buildingType);
-	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+	aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	aiPlanSetDesiredPriority(strongBuildPlanID, 90);
 	aiPlanAddUnitType(strongBuildPlanID, getBuilderType(), 1, numBuilders, numBuilders);
 	aiPlanSetEscrowID(strongBuildPlanID, cMilitaryEscrowID);
@@ -5950,7 +5959,8 @@ void age3Handler(int age=2)
       if (marketPlanID >= 0)
       {
 	 aiPlanSetVariableInt(marketPlanID, cBuildPlanBuildingTypeID, 0, cUnitTypeMarket);
-		   aiPlanSetVariableInt(marketPlanID, cBuildPlanNumAreaBorderLayers, 2, kbGetTownAreaID());
+		   aiPlanSetVariableInt(marketPlanID, cBuildPlanAreaID, 0, kbGetTownAreaID());
+       aiPlanSetVariableInt(marketPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
 	 aiPlanSetDesiredPriority(marketPlanID, 100);
 		   aiPlanAddUnitType(marketPlanID, getBuilderType(), 1, 1, 1);
 	 aiPlanSetEscrowID(marketPlanID, cEconomyEscrowID);
@@ -6442,9 +6452,8 @@ rule wallsAroundTowers
 	vector towerLoc = kbUnitGetPosition(towerID);
 
 	//This tower still needs walls?
-	int closeWalls = getUnitsAtLocQID(cMyID, cUnitStateAliveOrBuilding, wallProtoID, towerLoc, 5);
-	closeWalls = kbUnitQueryExecute(closeWalls);
-	if(kbUnitQueryExecute(closeWalls) < 4)
+	int closeWallsQID = getUnitsAtLocQID(cMyID, cUnitStateAliveOrBuilding, wallProtoID, towerLoc, 5);
+	if(kbUnitQueryExecute(closeWallsQID) < 4)
 	{
 	   int vilID = findClosestRelTo(towerID, cMyID, cUnitStateAlive, getBuilderType());
 	   if(vilID < 0) { return; }
@@ -6722,7 +6731,7 @@ rule UpdateMainBase
 	//For this it's crucial that we do not switch as long as it's the same spot.
 	//It seems ID's can shift sometimes - therefore we go by location now.
 	printEcho("changeMainBase");
-	kbBaseDestroy(cMyID, gMainBaseID);		//might cancel tc in progress?
+		kbBaseDestroy(cMyID, kbUnitGetBaseID(gMainBaseID));		//might cancel tc in progress?
 	aiSwitchMainBase(kbUnitGetBaseID(newTC),true);
 	kbBaseSetMain(cMyID, kbUnitGetBaseID(newTC),true);
 	kbSetTownLocation(kbUnitGetPosition(newTC));
@@ -6801,9 +6810,10 @@ rule UpdateMainBase
 	int strongBuildPlanID=aiPlanCreate("Build Strong Building ", cPlanBuild);
      if (strongBuildPlanID >= 0)
      {
-      int mainAreaID = kbAreaGetIDByPosition(kbBaseGetLocation(cMyID, gWallBaseID));
+      int mainAreaID = kbAreaGetIDByPosition(kbUnitGetPosition(gWallBaseID));
       aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanBuildingTypeID, 0, buildingType);
-		aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 2, mainAreaID);
+		aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanAreaID, 0, mainAreaID);
+		aiPlanSetVariableInt(strongBuildPlanID, cBuildPlanNumAreaBorderLayers, 0, 2);
       aiPlanSetDesiredPriority(strongBuildPlanID, 90);
 		aiPlanAddUnitType(strongBuildPlanID, getBuilderType(), 1, numBuilders, numBuilders);
       aiPlanSetEscrowID(strongBuildPlanID, cMilitaryEscrowID);
@@ -8649,11 +8659,11 @@ rule isolationWalls
       int numAreasAdded = 0;
 
       int mainArea = -1;
-      vector mainCenter = kbBaseGetLocation(aiGetMostHatedPlayerID(), mhpMainID);
-      if(gFrontWallPlanID >= 0)
-      {
-	mainCenter = kbBaseGetLocation(aiGetMostHatedPlayerID(), gFrontWallPlanID);
-      }
+      int enemyPlayerID = aiGetMostHatedPlayerID();
+      int enemyMainBaseID = kbUnitGetBaseID(mhpMainID);
+      if (enemyMainBaseID < 0)
+         return;
+      vector mainCenter = kbBaseGetLocation(enemyPlayerID, enemyMainBaseID);
       float mainX = xsVectorGetX(mainCenter);
       float mainZ = xsVectorGetZ(mainCenter);
       mainArea = kbAreaGetIDByPosition(mainCenter);
@@ -9360,7 +9370,7 @@ group AttackRules
 
 	gGuardSettlementID = settleID;		//assign the new ID to check at the next iteration.
 
-	if( kbAreaGroupGetIDByPosition(settleLoc) == kbAreaGroupGetIDByPosition(kbBaseGetLocation(cMyID, tcID)) )
+	if( kbAreaGroupGetIDByPosition(settleLoc) == kbAreaGroupGetIDByPosition(kbUnitGetPosition(tcID)) )
 	{
 		gSettlementGuardPlan=aiPlanCreate("Guard Settlement "+cMyID, cPlanDefend);
 		if(gSettlementGuardPlan >= 0)
@@ -9507,8 +9517,9 @@ rule buildSkyPassages
       if (planID < 0)
 	 return;
       aiPlanSetVariableInt(planID, cBuildPlanBuildingTypeID, 0, cUnitTypeSkyPassage);
- 	   aiPlanSetVariableInt(planID, cBuildPlanNumAreaBorderLayers, 0, 
+ 	   aiPlanSetVariableInt(planID, cBuildPlanAreaID, 0,
 	 kbAreaGetIDByPosition(kbBaseGetLocation(cMyID, kbBaseGetMainID(cMyID))) );
+       aiPlanSetVariableInt(planID, cBuildPlanNumAreaBorderLayers, 0, 2);
       aiPlanSetDesiredPriority(planID, 70);
       aiPlanSetMilitary(planID, true);
       aiPlanSetEconomy(planID, false);
