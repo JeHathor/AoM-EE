@@ -490,6 +490,53 @@ inactive
    int upID = gLandUPID;				// Active unit picker, for getting target military size
    int targetPop = kbUnitPickGetMinimumPop(upID);	// Size needed to launch an attack, in pop slots
    int mainBaseID = kbBaseGetMainID(cMyID);
+   vector defendPoint = kbBaseGetLocation(cMyID, mainBaseID);
+   int mainAreaGroup = kbAreaGroupGetIDByPosition(defendPoint);
+
+   // Protect the largest active food, wood, or gold gathering workforce.
+   int foodPlanID = aiPlanGetIDByTypeAndVariableType(cPlanGather, cGatherPlanResourceType, cResourceFood, true);
+   int woodPlanID = aiPlanGetIDByTypeAndVariableType(cPlanGather, cGatherPlanResourceType, cResourceWood, true);
+   int goldPlanID = aiPlanGetIDByTypeAndVariableType(cPlanGather, cGatherPlanResourceType, cResourceGold, true);
+   int largestGatherPlanID = -1;
+   int largestGathererCount = 0;
+
+   if (foodPlanID >= 0 && aiPlanGetActive(foodPlanID))
+   {
+      int foodGathererCount = aiPlanGetNumberUnits(foodPlanID, cUnitTypeUnit);
+      if (foodGathererCount > largestGathererCount)
+      {
+         largestGathererCount = foodGathererCount;
+         largestGatherPlanID = foodPlanID;
+      }
+   }
+   if (woodPlanID >= 0 && aiPlanGetActive(woodPlanID))
+   {
+      int woodGathererCount = aiPlanGetNumberUnits(woodPlanID, cUnitTypeUnit);
+      if (woodGathererCount > largestGathererCount)
+      {
+         largestGathererCount = woodGathererCount;
+         largestGatherPlanID = woodPlanID;
+      }
+   }
+   if (goldPlanID >= 0 && aiPlanGetActive(goldPlanID))
+   {
+      int goldGathererCount = aiPlanGetNumberUnits(goldPlanID, cUnitTypeUnit);
+      if (goldGathererCount > largestGathererCount)
+      {
+         largestGathererCount = goldGathererCount;
+         largestGatherPlanID = goldPlanID;
+      }
+   }
+
+   if (largestGatherPlanID >= 0 && largestGathererCount > 0)
+   {
+      vector gatherLocation = aiPlanGetLocation(largestGatherPlanID);
+      if (calcDistanceToPos(cInvalidVector, gatherLocation) >= 4 &&
+          kbAreaGroupGetIDByPosition(gatherLocation) == mainAreaGroup)
+      {
+         defendPoint = gatherLocation;
+      }
+   }
 
    if (gDefendPlanID < 0)
    {
@@ -501,7 +548,7 @@ inactive
 		 return;
    
 	  //aiPlanSetVariableInt(gDefendPlanID, cDefendPlanDefendBaseID, 0, mainBaseID);
-	  aiPlanSetVariableVector(gDefendPlanID, cDefendPlanDefendPoint, 0, kbBaseGetLocation(cMyID, mainBaseID));
+	  aiPlanSetVariableVector(gDefendPlanID, cDefendPlanDefendPoint, 0, defendPoint);
 	  aiPlanSetVariableFloat(gDefendPlanID, cDefendPlanEngageRange, 0, 50.0);
 	  aiPlanSetVariableInt(gDefendPlanID, cDefendPlanRefreshFrequency, 0, 30);
 	  aiPlanSetVariableFloat(gDefendPlanID, cDefendPlanGatherDistance, 0, 50.0);
@@ -519,6 +566,9 @@ inactive
 	  return;
    }
 
+   // Keep the defend point aligned with the largest active food, wood, or gold gather plan.
+   aiPlanSetVariableVector(gDefendPlanID, cDefendPlanDefendPoint, 0, defendPoint);
+
    if ( (getPlanPopSlots(gDefendPlanID) > targetPop) || (kbUnitCount(cMyID, cUnitTypeAbstractTitan, cUnitStateAlive)>0) )   // Make room for attack plan
    {
 	  //printEcho("***** Killing defend plan. ("+getPlanPopSlots(gDefendPlanID)+"/"+targetPop+")");
@@ -527,12 +577,11 @@ inactive
    }
 
    // Check if it's on the wrong continent
-   int myAreaGroup = kbAreaGroupGetIDByPosition(kbBaseGetLocation(cMyID, mainBaseID));
-   if ( myAreaGroup != kbAreaGroupGetIDByPosition(aiPlanGetLocation(gDefendPlanID)) )
+   if ( mainAreaGroup != kbAreaGroupGetIDByPosition(aiPlanGetLocation(gDefendPlanID)) )
    {  // Defend plan is on a different continent, scratch it.
 	  if (kbAreaGroupGetIDByPosition(aiPlanGetLocation(gDefendPlanID)) != -1)
 	  {
-		 printEcho("***** Defend plan is in wrong areaGroup:"+myAreaGroup+", "+kbAreaGroupGetIDByPosition(aiPlanGetLocation(gDefendPlanID)));
+		 printEcho("***** Defend plan is in wrong areaGroup:"+mainAreaGroup+", "+kbAreaGroupGetIDByPosition(aiPlanGetLocation(gDefendPlanID)));
 		 pauseBaseDefendPlan();
 		 xsDisableSelf();
 	  }
