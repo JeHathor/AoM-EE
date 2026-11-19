@@ -4766,8 +4766,8 @@ void nomadBuildSettlementCallBack(int parm1=-1)
    //Kill the villie explore plan.
    aiPlanDestroy(gNomadExplorePlanID1);
 
-   //Find our one settlement and make it the main base.
-   int newBaseID=kbUnitGetBaseID(findUnit(cMyID, cUnitStateAliveOrBuilding, cUnitTypeAbstractSettlement));
+   //Use our one settlement and make it the main base.
+   int newBaseID=kbUnitGetBaseID(settlementID);
    aiSwitchMainBase(newBaseID, true);
    kbBaseSetMain(cMyID, newBaseID, true);
 
@@ -9337,7 +9337,7 @@ group AttackRules
 
 	int tcID = gMainBaseID;
 	int mhpSettleCount = kbUnitCount(aiGetMostHatedPlayerID(), cUnitTypeAbstractSettlement, cUnitStateAlive);
-	int mySettleCount = kbUnitCount(aiGetMostHatedPlayerID(), cUnitTypeAbstractSettlement, cUnitStateAlive);
+	int mySettleCount = kbUnitCount(cMyID, cUnitTypeAbstractSettlement, cUnitStateAlive);
 	if (((mhpSettleCount < 2) || (mhpSettleCount < mySettleCount)) && (gTransportMap == false))
 	{
 		tcID = findClosestRelTo(tcID, aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeAbstractSettlement);
