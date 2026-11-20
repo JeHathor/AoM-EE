@@ -4009,9 +4009,10 @@ void init(void)
       kbUnitQuerySetState(KOTHunitQueryID, cUnitStateAny);
 	   kbUnitQueryResetResults(KOTHunitQueryID);
 	   int numberFound = kbUnitQueryExecute(KOTHunitQueryID);
-      gKOTHPlentyUnitID = kbUnitQueryGetResult(KOTHunitQueryID, 0);
-      kbSetForwardBasePosition(kbUnitGetPosition(gKOTHPlentyUnitID));
-
+      if (numberFound > 0) {
+	   gKOTHPlentyUnitID = kbUnitQueryGetResult(KOTHunitQueryID, 0);
+	   kbSetForwardBasePosition(kbUnitGetPosition(gKOTHPlentyUnitID));
+      }
       xsEnableRule("findFish");
    }
    if(gFishMap == false)	//really no fish?
@@ -4800,7 +4801,7 @@ void age2Handler(int age=1)
    xsEnableRule("buildForwardTowers");
    xsEnableRule("destroyOtherBases");
    xsEnableRule("wallsAroundTowers");
-   xsEnableRule("towerSettlements");
+   xsEnableRule("towerNeutralSettlements");
 
    if(cMyCulture == cCultureAtlantean && cvRushBoomSlider > 0.8)
    {
@@ -6861,6 +6862,7 @@ rule trainGatherers
    inactive
    runImmediately
 {
+    static int trainGatherersQueryID = -1;
     if ( (aiGetGameMode() == cGameModeDeathmatch) && (xsGetTime() < 60*8*1000) )
     {
 	return;		//DM needs no more yet.
@@ -6928,14 +6930,19 @@ rule trainGatherers
     {
 		return;		//We need an empty queue for oxcarts!
     }
-    int tcQueryID=kbUnitQueryCreate("findTcQuery");
-    kbUnitQuerySetPlayerID(tcQueryID, cMyID);
-    kbUnitQuerySetUnitType(tcQueryID, cUnitTypeAbstractSettlement);
-    kbUnitQuerySetState(tcQueryID, cUnitStateAlive);
-    kbUnitQuerySetActionType(tcQueryID, cActionIdle);
+    if(trainGatherersQueryID < 0)
+    {
+        trainGatherersQueryID=kbUnitQueryCreate("findTcQuery");
+    }
 
-    kbUnitQueryResetResults(tcQueryID);
-    int numberFound=kbUnitQueryExecute(tcQueryID);
+    // SetPlayerID resets query data by default; rebuild all filters each run.
+    kbUnitQuerySetPlayerID(trainGatherersQueryID, cMyID);
+    kbUnitQuerySetUnitType(trainGatherersQueryID, cUnitTypeAbstractSettlement);
+    kbUnitQuerySetState(trainGatherersQueryID, cUnitStateAlive);
+    kbUnitQuerySetActionType(trainGatherersQueryID, cActionIdle);
+
+    kbUnitQueryResetResults(trainGatherersQueryID);
+    int numberFound=kbUnitQueryExecute(trainGatherersQueryID);
 
     int currentVilPop = kbUnitCount(cMyID, cUnitTypeAbstractVillager, cUnitStateAlive);
     for(i=0; < numberFound)
@@ -6943,7 +6950,7 @@ rule trainGatherers
 	int futureVilPop = currentVilPop+(i+1);
 	if(futureVilPop < gMaxVilPop)	//global is set with updateEM
 	{
-	    int myTC = kbUnitQueryGetResult(tcQueryID, i);
+	    int myTC = kbUnitQueryGetResult(trainGatherersQueryID, i);
 	    aiTaskUnitTrain(myTC, getGathererType());
 	}else{
 		break;		//Don't train more.
@@ -6960,6 +6967,7 @@ rule TrainFishingShips
    inactive
    runImmediately
 {
+    static int trainFishingShipsQueryID = -1;
     if(gFishMap == false)	//Don't fish!
     {
 	xsDisableSelf();
@@ -6971,20 +6979,23 @@ rule TrainFishingShips
     }
 
     int myDock = findUnitRM(cMyID, cUnitStateAlive, cUnitTypeDock, true);
+    if(myDock < 0)
+        return;
     int areaID = kbAreaGetClosetArea(kbUnitGetPosition(myDock), cAreaTypeWater);
 
-    int fishQueryID = kbUnitQueryCreate("findFishQuery");
+    if(trainFishingShipsQueryID < 0)
+    {
+        trainFishingShipsQueryID = kbUnitQueryCreate("findFishQuery");
+    }
 
-    if(fishQueryID < 0)
-	return;
+    // SetPlayerID resets query data by default; rebuild all filters each run.
+    kbUnitQuerySetPlayerID(trainFishingShipsQueryID, 0);
+    kbUnitQuerySetUnitType(trainFishingShipsQueryID, cUnitTypeFish);
+    kbUnitQuerySetState(trainFishingShipsQueryID, cUnitStateAlive);
+    kbUnitQuerySetAreaID(trainFishingShipsQueryID, areaID);
+    kbUnitQueryResetResults(trainFishingShipsQueryID);
 
-    kbUnitQuerySetPlayerID(fishQueryID, 0);
-    kbUnitQuerySetUnitType(fishQueryID, cUnitTypeFish);
-    kbUnitQuerySetState(fishQueryID, cUnitStateAlive);
-    kbUnitQuerySetAreaID(fishQueryID, areaID);
-    kbUnitQueryResetResults(fishQueryID);
-
-    int fishCount = kbUnitQueryExecute(fishQueryID);
+    int fishCount = kbUnitQueryExecute(trainFishingShipsQueryID);
     int maxNumBoatsInArea = gNumBoatsToMaintain;
     if (maxNumBoatsInArea > fishCount && fishCount >= 0)
     {
@@ -9406,9 +9417,9 @@ group AttackRules
 }
 
 //==============================================================================
-// RULE towerSettlements	[todo]
+// RULE towerNeutralSettlements	[todo]
 //==============================================================================
-rule towerSettlements
+rule towerNeutralSettlements
    minInterval 35
    inactive
 {/*
@@ -9466,12 +9477,16 @@ rule towerSettlements
 	int pz = xsVectorGetZ(path)*buildDistance;
 	vector buildPoint = xsVectorSet(ax-px,ay-py,az-pz);
 
+	int buildAreaID = kbAreaGetIDByPosition(buildPoint);
+
 	//Build at buildPoint
 	int towerSettlementPlan = aiPlanCreate("SettleProtection"+cMyID, cPlanBuild);
 	if (towerSettlementPlan >= 0)
 	{
 		aiPlanSetInitialPosition(towerSettlementPlan, buildPoint);
 		aiPlanSetVariableInt(towerSettlementPlan, cBuildPlanBuildingTypeID, 0, buildingID);
+		aiPlanSetVariableInt(towerSettlementPlan, cBuildPlanAreaID, 0, buildAreaID);
+		aiPlanSetVariableInt(towerSettlementPlan, cBuildPlanNumAreaBorderLayers, 0, 0);
 
 	   if(cMyCiv == cCivGaia) {
 		aiPlanSetVariableInt(towerSettlementPlan, cBuildPlanMaxRetries, 0, 4);

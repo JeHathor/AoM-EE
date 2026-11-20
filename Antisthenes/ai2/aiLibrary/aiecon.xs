@@ -2297,6 +2297,14 @@ rule buildSettlements
    {
 	return;		// Skip if we're still in nomad startup mode.
    }
+   if(
+	aiGetPersonality() != "Apocalypse Bot" && cMyCiv == cCivGaia
+	&&
+	numberSettlements > 0 && kbGetTechStatus(gAge2MinorGod) < cTechStatusResearching
+     )
+   {
+	return;		// We are still in BO phase!
+   }
 
    //If we're on Easy and we have 3 settlements, go away.
    if(cvMasterDifficulty <= cDifficultyEasy && numberSettlementsPlanned >= 3)
