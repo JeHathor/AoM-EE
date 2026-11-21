@@ -1,0 +1,447 @@
+<div class="aom-api-diff" id="aom-reference1-to-2-diff">
+<style>
+#aom-reference1-to-2-diff{font-family:system-ui,sans-serif;line-height:1.45}
+#aom-reference1-to-2-diff h2,#aom-reference1-to-2-diff h3{margin:1.2em 0 .45em}
+#aom-reference1-to-2-diff .summary{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0}
+#aom-reference1-to-2-diff .metric{border:1px solid #bbb;border-radius:8px;padding:.75rem 1rem;min-width:8rem}
+#aom-reference1-to-2-diff .metric strong{display:block;font-size:1.6rem}
+#aom-reference1-to-2-diff code{overflow-wrap:anywhere}
+#aom-reference1-to-2-diff table{border-collapse:collapse;width:100%;margin:.5rem 0 1rem}
+#aom-reference1-to-2-diff th,#aom-reference1-to-2-diff td{border:1px solid #bbb;padding:.4rem .55rem;text-align:left;vertical-align:top}
+#aom-reference1-to-2-diff th{background:rgba(127,127,127,.12)}
+#aom-reference1-to-2-diff details{margin:.7rem 0}
+</style>
+<h2>Age of Mythology XS API additions: Vanilla → The Titans</h2>
+<p>Comparison of the Vanilla reference (Vanilla) against The Titans Expansion reference (The Titans). “New” means the declaration or constant identifier appears in The Titans but not Vanilla.</p>
+<div class="summary">
+<div class="metric"><strong>7</strong>New function names</div>
+<div class="metric"><strong>379</strong>New constants</div>
+<div class="metric"><strong>4</strong>Function names with replaced signatures</div>
+</div>
+<h3>New functions (7)</h3>
+<table><thead><tr><th>Declaration</th><th>Description in The Titans</th></tr></thead><tbody>
+<tr><td><code>bool aiTaskUnitTransform(int unitID)</code></td><td>Takes the given unit, and transforms it according to the unit transform table in world.</td></tr>
+<tr><td><code>float kbGetPlayerHandicap(int playerID)</code></td><td>Returns the player's handicap multiplier (ie., 1.0 = no handicap).</td></tr>
+<tr><td><code>float kbUnitCostPerResource(int protoUnitID, int resourceID)</code></td><td>returns the cost of the protounit for the given resource.</td></tr>
+<tr><td><code>long aiPlanGetUnitByIndex(int planID, int index)</code></td><td>returns the unit ID of a particular unit in the plan</td></tr>
+<tr><td><code>void aiBreakpointGo(int playerID)</code></td><td>Restart XS execution after the current breakpoint.</td></tr>
+<tr><td><code>void aiBreakpointSet(int playerID, string filename, int lineNumber, bool on)</code></td><td>Sets a breakpoint.</td></tr>
+<tr><td><code>void kbSetPlayerHandicap(int playerID, float handicap)</code></td><td>Sets the indicated player's handicap multiplier (ie., 1.0 = no handicap).</td></tr>
+</tbody></table>
+<h3>Existing function names with changed signatures (4)</h3><p>These are signature replacements, not additional function names. The source declaration is reproduced as written, including apparent typographical inconsistencies.</p>
+<table><thead><tr><th>Function</th><th>Vanilla declaration</th><th>The Titans declaration</th></tr></thead><tbody>
+<tr><td><code>aiPlanCreate</code></td><td><code>int aiPlanCreate(strint planID)</code></td><td><code>int aiPlanCreate(string planName, int typeName)</code></td></tr>
+<tr><td><code>aiPlanDestroy</code></td><td><code>bool aiPlanDestroy(int planType, int planState, bool active, int index)</code></td><td><code>bool aiPlanDestroy(int planID)</code></td></tr>
+<tr><td><code>aiPlanGetIDByIndex</code></td><td><code>int aiPlanGetIDByIndex(ing planName, int typeName)</code></td><td><code>int aiPlanGetIDByIndex(int planType, int planState, bool active, int index)</code></td></tr>
+<tr><td><code>xsVectorSet</code></td><td><code>vector xsVectorSet(float x, float y, float z)</code></td><td><code>float xsVectorSet(float x, float y, float z)</code></td></tr>
+</tbody></table>
+<h3>New constants (379)</h3><p>All entries are <code>const</code> declarations present in The Titans but absent by identifier in Vanilla. Values are reproduced verbatim.</p>
+<details open=""><summary><strong>Age Constants</strong> (1)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cAge5</code></td><td><code>4</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Plan States</strong> (1)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cPlanStateUnknown</code></td><td><code>23</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>ProtoPower Constants</strong> (27)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cPowerCarnivora</code></td><td><code>1</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerBronzeXP05</code></td><td><code>4</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeCaladria</code></td><td><code>8</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeChimera</code></td><td><code>9</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeCyclops</code></td><td><code>10</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeHydra</code></td><td><code>11</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeManticore</code></td><td><code>12</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChangeNemean</code></td><td><code>13</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerChaos</code></td><td><code>14</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerGaiaForestSPC</code></td><td><code>24</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerGaiaForest</code></td><td><code>25</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerHeroize</code></td><td><code>29</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerHesperides</code></td><td><code>30</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerImplode</code></td><td><code>31</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerDeconstruction</code></td><td><code>42</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerReverseWonder</code></td><td><code>43</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerSeedofGaia</code></td><td><code>45</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerSPCLightningStorm</code></td><td><code>51</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerSpiders</code></td><td><code>53</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTartarianGate</code></td><td><code>55</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTitanGate</code></td><td><code>56</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTornadoXP05</code></td><td><code>57</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTraitors</code></td><td><code>59</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTraitorsSPC</code></td><td><code>60</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTremor</code></td><td><code>61</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerVolcano</code></td><td><code>65</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerVortex</code></td><td><code>66</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Power Type Constants</strong> (14)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cPowerTypeReverseTime</code></td><td><code>35</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeTraitors</code></td><td><code>36</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeVolcano</code></td><td><code>37</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeTremor</code></td><td><code>38</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeTartarianGate</code></td><td><code>39</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeVortex</code></td><td><code>40</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeHesperides</code></td><td><code>41</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeChaos</code></td><td><code>42</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeSpiders</code></td><td><code>43</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeHeroize</code></td><td><code>44</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeImplode</code></td><td><code>45</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeTitanGate</code></td><td><code>46</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeGaiaForest</code></td><td><code>47</code></td></tr>
+<tr><td><code>int</code></td><td><code>cPowerTypeCarnivora</code></td><td><code>48</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>GodPower Targeting Models</strong> (1)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cGodPowerTargetingModelUnbuild</code></td><td><code>11</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Civs</strong> (4)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cCivKronos</code></td><td><code>9</code></td></tr>
+<tr><td><code>int</code></td><td><code>cCivOuranos</code></td><td><code>10</code></td></tr>
+<tr><td><code>int</code></td><td><code>cCivGaia</code></td><td><code>11</code></td></tr>
+<tr><td><code>int</code></td><td><code>cCivAtlantean</code></td><td><code>16</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Cultures</strong> (1)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cCultureAtlantean</code></td><td><code>3</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Unit Action Constants</strong> (2)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cActionUnbuild</code></td><td><code>68</code></td></tr>
+<tr><td><code>int</code></td><td><code>cActionAutoLOS</code></td><td><code>69</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Techs: 507 total</strong> (114)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cTechAge1Kronos</code></td><td><code>392</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge1Gaia</code></td><td><code>393</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechStartingUnitsAtlantean</code></td><td><code>394</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge1Ouranos</code></td><td><code>395</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechStartingResourcesAtlantean</code></td><td><code>396</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge2Okeanus</code></td><td><code>397</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge2Prometheus</code></td><td><code>398</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge2Leto</code></td><td><code>399</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge3Hyperion</code></td><td><code>400</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge3Rheia</code></td><td><code>401</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge3Theia</code></td><td><code>402</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge4Helios</code></td><td><code>403</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge4Hekate</code></td><td><code>404</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge4Atlas</code></td><td><code>405</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechReverseTime</code></td><td><code>406</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAudrey</code></td><td><code>407</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTraitors</code></td><td><code>408</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChaos</code></td><td><code>409</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechVolcano</code></td><td><code>410</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBronzeWall</code></td><td><code>411</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechIronWall</code></td><td><code>412</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTremor</code></td><td><code>414</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeavyFireship</code></td><td><code>415</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeartoftheTitans</code></td><td><code>416</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHephaestusRevenge</code></td><td><code>417</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechGaiaForest</code></td><td><code>418</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTartarianGate</code></td><td><code>419</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechLevyMainlineUnits</code></td><td><code>420</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechLevySpecialtyUnits</code></td><td><code>421</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechLevyPalaceUnits</code></td><td><code>422</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechConscriptMainlineUnits</code></td><td><code>423</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechConscriptSpecialtyUnits</code></td><td><code>424</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechConscriptPalaceUnits</code></td><td><code>425</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHalooftheSun</code></td><td><code>426</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHornsofConsecration</code></td><td><code>427</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechLemurianDescendants</code></td><td><code>428</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChannels</code></td><td><code>429</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAlluvialClay</code></td><td><code>430</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechVortex</code></td><td><code>431</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechMythicRejuvenation</code></td><td><code>432</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeroicRenewal</code></td><td><code>433</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechReverseWonder</code></td><td><code>434</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBiteoftheShark</code></td><td><code>435</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHesperides</code></td><td><code>436</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeavyChieroballista</code></td><td><code>437</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSpiders</code></td><td><code>438</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeroize</code></td><td><code>439</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechGemino</code></td><td><code>440</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechNorseArmory</code></td><td><code>441</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechImplode</code></td><td><code>442</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSecretsoftheTitans</code></td><td><code>443</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTitanGate</code></td><td><code>444</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechDisableTitan</code></td><td><code>445</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechFocus</code></td><td><code>446</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSafePassage</code></td><td><code>447</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeroicFleet</code></td><td><code>448</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechWeightlessMace</code></td><td><code>449</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechEyesofAtlas</code></td><td><code>450</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAsperBlood</code></td><td><code>451</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTitanShield</code></td><td><code>452</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechPoseidonsSecret</code></td><td><code>453</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicWhirlwindSPC</code></td><td><code>454</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicofBronzeSPC</code></td><td><code>455</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicofEarthquakeSPC</code></td><td><code>456</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBronzeXP05</code></td><td><code>457</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTornadoXP05</code></td><td><code>458</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicTitansTreasure</code></td><td><code>459</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechVolcanicForge</code></td><td><code>460</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicGaiasBookofKnowledge</code></td><td><code>461</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeCyclops</code></td><td><code>462</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeChimera</code></td><td><code>463</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeCaladria</code></td><td><code>464</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeManticore</code></td><td><code>465</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeNemean</code></td><td><code>466</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChangeHydra</code></td><td><code>467</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSPCLightningStorm</code></td><td><code>468</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechDeathmatchAtlantean</code></td><td><code>469</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechMailofOrichalkos</code></td><td><code>470</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHandsofthePharaoh</code></td><td><code>471</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBronzeAll</code></td><td><code>472</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBronzeAllThor</code></td><td><code>473</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechCopperAll</code></td><td><code>474</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechCopperAllThor</code></td><td><code>475</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechIronAll</code></td><td><code>476</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechIronAllThor</code></td><td><code>477</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechMediumAll</code></td><td><code>478</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechHeavyAll</code></td><td><code>479</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChampionAll</code></td><td><code>480</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRheiasGift</code></td><td><code>481</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTimeShiftFake</code></td><td><code>482</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechFocusTurbo</code></td><td><code>483</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechCelerity</code></td><td><code>484</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSeedofGaia</code></td><td><code>485</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechGrantPhoenixEgg</code></td><td><code>486</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechIoGuardian</code></td><td><code>487</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechDisableAtlanteanFavor</code></td><td><code>488</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTimeShiftFake2</code></td><td><code>489</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAxeofMuspell</code></td><td><code>490</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechChampionChieroballista</code></td><td><code>491</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechTraitorsSPC</code></td><td><code>492</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSuperRocs</code></td><td><code>493</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechBeastSlayer</code></td><td><code>494</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechLanceofStone</code></td><td><code>495</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSuddenDeathAtlantean</code></td><td><code>496</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechRelicofAncestorsSPC</code></td><td><code>497</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSuperTitanSPC</code></td><td><code>498</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechSuperNidhoggSPC</code></td><td><code>499</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechPetrified</code></td><td><code>500</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechPrometheusWeak</code></td><td><code>501</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechPrometheusWeakest</code></td><td><code>502</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge2AtlanteanHeroes</code></td><td><code>503</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge4AtlanteanHeroes</code></td><td><code>504</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechAge15Atlantean</code></td><td><code>505</code></td></tr>
+<tr><td><code>int</code></td><td><code>cTechGaiaForestSPC</code></td><td><code>506</code></td></tr>
+</tbody></table></details>
+<details open=""><summary><strong>Unit Types: 995 total.</strong> (214)</summary><table><thead><tr><th>Type</th><th>Constant</th><th>Value</th></tr></thead><tbody>
+<tr><td><code>int</code></td><td><code>cUnitTypeTremor</code></td><td><code>290</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMeteorite</code></td><td><code>291</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeIceberg</code></td><td><code>292</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGaiaCreepFlowers</code></td><td><code>293</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeDeconstructUnit</code></td><td><code>294</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeDeconstructBuilding</code></td><td><code>295</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeChaoseffect</code></td><td><code>296</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTraitorseffect</code></td><td><code>297</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMeteoritedeath</code></td><td><code>298</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMarshBrush</code></td><td><code>299</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTundraBrush</code></td><td><code>300</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAudreyBase</code></td><td><code>301</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAudreyWaterBase</code></td><td><code>302</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVortexstart</code></td><td><code>303</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVortexfinish</code></td><td><code>304</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMarshstump</code></td><td><code>305</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTundrastump</code></td><td><code>306</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFireballLaunchDamageEffect</code></td><td><code>307</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSpider</code></td><td><code>308</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodeSphere</code></td><td><code>309</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodeSphereEffect</code></td><td><code>310</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodeLightningEffect</code></td><td><code>311</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodePullEffect</code></td><td><code>312</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeJavelinFlaming</code></td><td><code>313</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodeShockwave</code></td><td><code>314</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSpiderDoor</code></td><td><code>315</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLampadesBlood</code></td><td><code>316</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAcidPool</code></td><td><code>317</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSpiderWarn</code></td><td><code>318</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGaiaForesteffect</code></td><td><code>319</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVortexstartlinked</code></td><td><code>320</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVortexfinishlinked</code></td><td><code>321</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVortexlanding</code></td><td><code>322</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeImplodeDebris</code></td><td><code>323</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanAtlanteanFootprint</code></td><td><code>324</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTimeshiftout</code></td><td><code>325</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTimeshiftin</code></td><td><code>326</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGateflame</code></td><td><code>327</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeHekaShockwaveSFX</code></td><td><code>328</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGatecreatureeffect</code></td><td><code>329</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGarrisonFlagSkyPassage</code></td><td><code>330</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLampadesBolt</code></td><td><code>331</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFireSiphonFire</code></td><td><code>332</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStymphBirdFeather</code></td><td><code>333</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeOsirisPyramidDead</code></td><td><code>334</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeRocket</code></td><td><code>335</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeUIRangeIndicatorAtlanteanSFX</code></td><td><code>336</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTowerMirrorFocuser</code></td><td><code>337</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKronnyBirth</code></td><td><code>338</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMistOlympus</code></td><td><code>339</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSeagullHigh</code></td><td><code>340</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSeagullLow</code></td><td><code>341</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeRepeatFlag</code></td><td><code>342</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBallofFirePrometheus</code></td><td><code>343</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeShockwavestuneffect</code></td><td><code>344</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeArkantosGodOut</code></td><td><code>345</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeOlympusTempleSFX</code></td><td><code>346</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKronnyBirthSFX</code></td><td><code>347</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLavaSheet</code></td><td><code>348</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSoundGaiaSFX</code></td><td><code>349</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFootprintPrometheanbig</code></td><td><code>350</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFootprintPrometheansmall</code></td><td><code>351</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeCinematicDeadBodiesXpack</code></td><td><code>352</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianRubble</code></td><td><code>353</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanDeath</code></td><td><code>354</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeErebusTree</code></td><td><code>687</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVillagerAtlantean</code></td><td><code>688</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeManor</code></td><td><code>689</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVillagerAtlanteanHero</code></td><td><code>690</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSwordsman</code></td><td><code>691</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTridentSoldier</code></td><td><code>692</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTridentSoldierHero</code></td><td><code>693</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSwordsmanHero</code></td><td><code>694</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFishingShipAtlantean</code></td><td><code>695</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBireme</code></td><td><code>696</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTransportShipAtlantean</code></td><td><code>697</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFireShipAtlantean</code></td><td><code>698</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSiegeShipAtlantean</code></td><td><code>699</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLancer</code></td><td><code>700</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLancerHero</code></td><td><code>701</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeCounterBuilding</code></td><td><code>702</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeChieroballista</code></td><td><code>703</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFireSiphon</code></td><td><code>704</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeCaravanAtlantean</code></td><td><code>705</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePalace</code></td><td><code>706</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeRoyalGuard</code></td><td><code>707</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeRoyalGuardHero</code></td><td><code>708</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSkyPassage</code></td><td><code>709</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanAtlantean</code></td><td><code>710</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBarracksAtlantean</code></td><td><code>711</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeArcherAtlantean</code></td><td><code>712</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeArcherAtlanteanHero</code></td><td><code>713</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMaceman</code></td><td><code>714</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMacemanHero</code></td><td><code>715</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeJavelinCavalry</code></td><td><code>716</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeJavelinCavalryHero</code></td><td><code>717</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAudrey</code></td><td><code>718</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAudreyWater</code></td><td><code>719</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGuild</code></td><td><code>720</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVolcano</code></td><td><code>721</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBehemoth</code></td><td><code>722</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeFlyingMedic</code></td><td><code>723</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTowerMirror</code></td><td><code>724</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePromethean</code></td><td><code>725</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeServant</code></td><td><code>726</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSatyr</code></td><td><code>727</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStymphalianBird</code></td><td><code>728</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAutomaton</code></td><td><code>729</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeManOWar</code></td><td><code>730</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePrometheanSmall</code></td><td><code>731</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeOracleHero</code></td><td><code>732</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGaiaForesttree</code></td><td><code>733</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeHekaGigantes</code></td><td><code>734</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTundraTree</code></td><td><code>735</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMarshTree</code></td><td><code>736</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGate</code></td><td><code>737</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeOracleScout</code></td><td><code>738</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGatespawn</code></td><td><code>739</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLampades</code></td><td><code>740</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKastorAdult</code></td><td><code>741</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeMarshTreeBurning</code></td><td><code>742</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTundraTreeBurning</code></td><td><code>743</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePhoenixFromEgg</code></td><td><code>744</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeHesperidesTree</code></td><td><code>745</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeDryad</code></td><td><code>746</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeNereid</code></td><td><code>747</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanGate</code></td><td><code>748</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeWalkingWoodsMarsh</code></td><td><code>749</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeWalkingWoodsTundra</code></td><td><code>750</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanPrometheus</code></td><td><code>751</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGeneralMelagius</code></td><td><code>752</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePharaohofOsirisXP</code></td><td><code>753</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGuardianSleepingXP</code></td><td><code>754</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueofAutomaton</code></td><td><code>755</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueofAutomatonBase</code></td><td><code>756</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeArgus</code></td><td><code>757</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGaiaPool</code></td><td><code>758</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSpiderEgg</code></td><td><code>759</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKingFolstag</code></td><td><code>760</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeOdinsTower</code></td><td><code>761</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueManticore</code></td><td><code>762</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueCyclops</code></td><td><code>763</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueNemeanLion</code></td><td><code>764</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueValkyrie</code></td><td><code>765</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueHydra</code></td><td><code>766</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueChimera</code></td><td><code>767</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGaiaForesttreeburning</code></td><td><code>768</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGateplacement</code></td><td><code>769</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTartarianGatebirth</code></td><td><code>770</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKrios</code></td><td><code>771</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKronny</code></td><td><code>772</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAjaxOlder</code></td><td><code>773</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAmanraOlder</code></td><td><code>774</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanGateDead</code></td><td><code>775</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTempleKronos</code></td><td><code>776</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeArkantosGod</code></td><td><code>777</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeEarth</code></td><td><code>778</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKronnyFlying</code></td><td><code>779</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeVictoryMarker</code></td><td><code>780</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeInvisibleWall</code></td><td><code>781</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeInvisibleTarget</code></td><td><code>782</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypePyramidOsirisXpack</code></td><td><code>783</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeStatueofMelagius</code></td><td><code>784</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTempleOvergrown</code></td><td><code>785</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeRocTent</code></td><td><code>786</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeGuardianXP</code></td><td><code>787</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAutomatonSPC</code></td><td><code>788</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSummoningTree</code></td><td><code>789</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSummoningTree2</code></td><td><code>790</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBolderRollingSmall</code></td><td><code>791</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTreeFinale</code></td><td><code>792</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeKastorStaff</code></td><td><code>793</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeHadesDoorSmall</code></td><td><code>794</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanKronos</code></td><td><code>795</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTitanGaia</code></td><td><code>796</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeWolfArctic</code></td><td><code>797</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeShadeXP</code></td><td><code>798</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeWolfArctic2</code></td><td><code>799</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeBella</code></td><td><code>800</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeAbstractTitan</code></td><td><code>860</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLokiHero</code></td><td><code>862</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeValidTraitorsTarget</code></td><td><code>961</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeSuperPredatorsAttack</code></td><td><code>962</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeSuperPredatorsAutoAttack</code></td><td><code>963</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeVolcanoAttack</code></td><td><code>964</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeValidDeconstructionTarget</code></td><td><code>965</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeValidTremorAttack</code></td><td><code>966</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeAffectedByChaos</code></td><td><code>967</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeValidReverseWonderTarget</code></td><td><code>968</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeCanBeThrown</code></td><td><code>969</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeTartarianGateValidOverlapPlacement</code></td><td><code>970</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeAffectedByVortex</code></td><td><code>971</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeDoesNotCreateLush</code></td><td><code>972</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeAffectedByHeroize</code></td><td><code>973</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeValidSpiderTarget</code></td><td><code>974</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeImplodeAttack</code></td><td><code>975</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeCanBeStoned</code></td><td><code>976</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeAffectedByFrostGiant</code></td><td><code>977</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypePerseusCanStone</code></td><td><code>978</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeMummyMinionTarget</code></td><td><code>979</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeTeleporter</code></td><td><code>980</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeScreamsOnSpiderPull</code></td><td><code>981</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeTimeshift</code></td><td><code>982</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeInvulnerableToGaia</code></td><td><code>983</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeEasySelectAvoid</code></td><td><code>984</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeBuildingNotTitanGate</code></td><td><code>985</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeNoFlailOnThrow</code></td><td><code>987</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeEscapesFrostOnTransform</code></td><td><code>988</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeSetAnimal</code></td><td><code>989</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeMythUnitNotTitan</code></td><td><code>990</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeShipNotFishinghip</code></td><td><code>991</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeAbstractVillNotHero</code></td><td><code>992</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeHouses</code></td><td><code>993</code></td></tr>
+<tr><td><code>int</code></td><td><code>cUnitTypeLogicalTypeGates</code></td><td><code>994</code></td></tr>
+</tbody></table></details>
+<h3>Comparison notes</h3>
+<ul>
+<li>The 7 new function names are <code>aiBreakpointSet</code>, <code>aiBreakpointGo</code>, <code>aiPlanGetUnitByIndex</code>, <code>aiTaskUnitTransform</code>, <code>kbUnitCostPerResource</code>, <code>kbGetPlayerHandicap</code> and <code>kbSetPlayerHandicap</code>.</li>
+<li>Four existing function names have replaced signatures: <code>aiPlanCreate</code>, <code>aiPlanDestroy</code>, <code>aiPlanGetIDByIndex</code> and <code>xsVectorSet</code>.</li>
+<li>The The Titans file contains a concatenated line around <code>kbGetResourceIncome</code> and <code>kbProtoUnitAvailable</code>. The latter is present in both references and is not treated as a new or removed function.</li>
+<li>Constants whose names already exist in Vanilla are excluded even where their values differ between the reference files; those differences can reflect version-specific sample/runtime context rather than newly introduced constants.</li>
+<li>The XS files declare constants using <code>const</code>; they do not use a separate <code>static</code> declaration keyword.</li>
+</ul>
+
+</div>
