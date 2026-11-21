@@ -1394,8 +1394,8 @@ rule updateTargetPop
   {
 	gNumberMilitaryUnitTypes = 1;
 
-	//civPopTarget = 25;
-	//milPopTarget = 0;
+	civPopTarget = 25;
+	milPopTarget = 0;
 
 	econPercent = 1.00;
 	econEscrow = 1.00;
@@ -1457,8 +1457,7 @@ rule updateTargetPop
 	econEscrow = econEscrow - 0.05;
     }
 
-    if(kbGetAge() == cAge1) {civPopTarget = 30;} else {civPopTarget = 60;}
-    civPopTarget = civPopTarget - (cvRushBoomSlider*5.99);	// +/- 5
+    civPopTarget = 60 - (cvRushBoomSlider*5.99);	// +/- 5
     if (gGlutRatio > 1.0)
     {
 	civPopTarget = civPopTarget / gGlutRatio;
@@ -6877,7 +6876,8 @@ rule trainGatherers
     {
 	return;		//Not enough TC's or no valid ID.
     }
-    if(kbGetAge() == cAge1 && kbResourceGet(cResourceFood) > 350)
+    int numVil = kbUnitCount(cMyID, cUnitTypeAbstractVillager, cUnitStateAlive);
+    if(kbGetAge() == cAge1 && kbResourceGet(cResourceFood) > 350 && numVil > 4)
     {
 	return;		//Prioritize Age-Up!
     }
@@ -6944,7 +6944,7 @@ rule trainGatherers
     kbUnitQueryResetResults(trainGatherersQueryID);
     int numberFound=kbUnitQueryExecute(trainGatherersQueryID);
 
-    int currentVilPop = kbUnitCount(cMyID, cUnitTypeAbstractVillager, cUnitStateAlive);
+    int currentVilPop = numVil;
     for(i=0; < numberFound)
     {
 	int futureVilPop = currentVilPop+(i+1);
