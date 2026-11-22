@@ -322,7 +322,7 @@ void updateAge4Options(int age=4)
 	    }
 	    if(cvMilitaryEconSlider > 0.6)	//Mil.
 	    {
-		if(cMyCiv != cCivZeus)
+		if(cMyCiv == cCivZeus)
 		{
 			gAge4MinorGod=cTechAge4Hera;
 		}else{
