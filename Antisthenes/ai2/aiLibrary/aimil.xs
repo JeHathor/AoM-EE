@@ -505,8 +505,8 @@ inactive
       int foodGathererCount = aiPlanGetNumberUnits(foodPlanID, cUnitTypeUnit);
       if (foodGathererCount > largestGathererCount)
       {
-         largestGathererCount = foodGathererCount;
-         largestGatherPlanID = foodPlanID;
+	 largestGathererCount = foodGathererCount;
+	 largestGatherPlanID = foodPlanID;
       }
    }
    if (woodPlanID >= 0 && aiPlanGetActive(woodPlanID))
@@ -514,8 +514,8 @@ inactive
       int woodGathererCount = aiPlanGetNumberUnits(woodPlanID, cUnitTypeUnit);
       if (woodGathererCount > largestGathererCount)
       {
-         largestGathererCount = woodGathererCount;
-         largestGatherPlanID = woodPlanID;
+	 largestGathererCount = woodGathererCount;
+	 largestGatherPlanID = woodPlanID;
       }
    }
    if (goldPlanID >= 0 && aiPlanGetActive(goldPlanID))
@@ -523,8 +523,8 @@ inactive
       int goldGathererCount = aiPlanGetNumberUnits(goldPlanID, cUnitTypeUnit);
       if (goldGathererCount > largestGathererCount)
       {
-         largestGathererCount = goldGathererCount;
-         largestGatherPlanID = goldPlanID;
+	 largestGathererCount = goldGathererCount;
+	 largestGatherPlanID = goldPlanID;
       }
    }
 
@@ -532,9 +532,9 @@ inactive
    {
       vector gatherLocation = aiPlanGetLocation(largestGatherPlanID);
       if (calcDistanceToPos(cInvalidVector, gatherLocation) >= 4 &&
-          kbAreaGroupGetIDByPosition(gatherLocation) == mainAreaGroup)
+	  kbAreaGroupGetIDByPosition(gatherLocation) == mainAreaGroup)
       {
-         defendPoint = gatherLocation;
+	 defendPoint = gatherLocation;
       }
    }
 

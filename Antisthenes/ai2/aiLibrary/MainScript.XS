@@ -4012,6 +4012,7 @@ void init(void)
 	   gKOTHPlentyUnitID = kbUnitQueryGetResult(KOTHunitQueryID, 0);
 	   kbSetForwardBasePosition(kbUnitGetPosition(gKOTHPlentyUnitID));
       }
+	   kbUnitQueryDestroy(KOTHunitQueryID);
       xsEnableRule("findFish");
    }
    if(gFishMap == false)	//really no fish?
@@ -4092,6 +4093,7 @@ void init(void)
 	    kbBaseSetMain(cMyID, newBaseID, true);
 	 }
       }
+		kbUnitQueryDestroy(settlementQueryID);
    }
 
    if(cvOkToChat == true)
@@ -7799,7 +7801,7 @@ rule handleMigration	//Settlers
 {
     //Get our start area ID.
     int villagerID = findUnit(cMyID, cUnitStateAlive, getBuilderType());
-    if(villagerID < 1)
+    if(villagerID < 0)
     {
 	villagerID = findUnit(cMyID, cUnitStateAlive, cUnitTypeAbstractVillager);
     }
@@ -9365,6 +9367,18 @@ group AttackRules
 	   	return;
 	}
 
+	int bonusCount = 0;	//Optional bonus to match the enemy.
+	if (kbGetAge() > cAge2 && cvMasterDifficulty > cDifficultyHard && aiPlanGetActive(gSettlementGuardPlan))
+	{
+	   int enemyQueryID = getUnitsAtLocQID(aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeLogicalTypeLandMilitary, settleLoc, 20);
+	   bonusCount = kbUnitQueryExecute(enemyQueryID);
+	   kbUnitQueryDestroy(enemyQueryID);
+	   if(bonusCount >= 5 + kbUnitCount(cMyID, cUnitTypeLogicalTypeLandMilitary, cUnitStateAlive))
+	   {
+		bonusCount = 0;	//Just accept the loss dude.
+	   }
+	}
+
 	if (gGuardSettlementID != settleID  &&  aiPlanGetActive(gSettlementGuardPlan))
 	{
 	   aiPlanDestroyByName("Guard Settlement "+cMyID);	//Destroy any old plan!
@@ -9374,8 +9388,11 @@ group AttackRules
 	}else{
 		if (aiPlanGetActive(gSettlementGuardPlan))
 		{
+			//Update the existing plan.
+			aiPlanAddUnitType(gSettlementGuardPlan, cUnitTypeHumanSoldier, 2, 2+bonusCount, 4+bonusCount);
 			return;					//Only one plan, no more.
 		}
+		if (settleID < 0) {return;}	//No need for a plan!
 		//This is the first time we got here. Go ahead and create a plan!
 	}
 
