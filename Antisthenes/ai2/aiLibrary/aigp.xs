@@ -70,6 +70,7 @@ vector findHuntableInfluence()
 	  }
    }
 
+   kbUnitQueryDestroy(queryID);
    return(best);
 }
 

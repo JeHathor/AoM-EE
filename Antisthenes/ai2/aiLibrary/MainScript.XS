@@ -6932,7 +6932,7 @@ rule trainGatherers
     }
     if(trainGatherersQueryID < 0)
     {
-        trainGatherersQueryID=kbUnitQueryCreate("findTcQuery");
+	trainGatherersQueryID=kbUnitQueryCreate("findTcQuery");
     }
 
     // SetPlayerID resets query data by default; rebuild all filters each run.
@@ -6980,12 +6980,12 @@ rule TrainFishingShips
 
     int myDock = findUnitRM(cMyID, cUnitStateAlive, cUnitTypeDock, true);
     if(myDock < 0)
-        return;
+	return;
     int areaID = kbAreaGetClosetArea(kbUnitGetPosition(myDock), cAreaTypeWater);
 
     if(trainFishingShipsQueryID < 0)
     {
-        trainFishingShipsQueryID = kbUnitQueryCreate("findFishQuery");
+	trainFishingShipsQueryID = kbUnitQueryCreate("findFishQuery");
     }
 
     // SetPlayerID resets query data by default; rebuild all filters each run.
@@ -8223,13 +8223,13 @@ active
 	//Update Attack Goal
 	if(activeAssault)	//Just go?
 	{
-            if(attackFrequency > 4 || attackFrequency > maxAttackFrequency)
+	    if(attackFrequency > 4 || attackFrequency > maxAttackFrequency)
 	    {
 		attackFrequency--;
 	    }
 	    aiPlanSetVariableInt(gLandAttackGoalID, cGoalPlanMinUnitNumber, 0, 3);
 	}else{
-            if(attackFrequency < maxAttackFrequency)
+	    if(attackFrequency < maxAttackFrequency)
 	    {
 		attackFrequency++;
 	    }
@@ -8673,7 +8673,7 @@ rule isolationWalls
       int enemyPlayerID = aiGetMostHatedPlayerID();
       int enemyMainBaseID = kbUnitGetBaseID(mhpMainID);
       if (enemyMainBaseID < 0)
-         return;
+	 return;
       vector mainCenter = kbBaseGetLocation(enemyPlayerID, enemyMainBaseID);
       float mainX = xsVectorGetX(mainCenter);
       float mainZ = xsVectorGetZ(mainCenter);

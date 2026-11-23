@@ -249,9 +249,9 @@ bool  configQuery( int queryID = -1, int unitType = -1, int action = -1, int sta
    {
       kbUnitQuerySetPosition(queryID, center);
       if (sort == true)
-         kbUnitQuerySetAscendingSort(queryID, true);
+	 kbUnitQuerySetAscendingSort(queryID, true);
       if (radius != -1)
-         kbUnitQuerySetMaximumDistance(queryID, radius);
+	 kbUnitQuerySetMaximumDistance(queryID, radius);
    }
    return(true);
 }
@@ -291,9 +291,9 @@ bool  configQueryRelation( int queryID = -1, int unitType = -1, int action = -1,
    {
       kbUnitQuerySetPosition(queryID, center);
       if (sort == true)
-         kbUnitQuerySetAscendingSort(queryID, true);
+	 kbUnitQuerySetAscendingSort(queryID, true);
       if (radius != -1)
-         kbUnitQuerySetMaximumDistance(queryID, radius);
+	 kbUnitQuerySetMaximumDistance(queryID, radius);
    }
    return(true);
 }
