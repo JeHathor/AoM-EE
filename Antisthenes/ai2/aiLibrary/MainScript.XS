@@ -9372,7 +9372,6 @@ group AttackRules
 	{
 	   int enemyQueryID = getUnitsAtLocQID(aiGetMostHatedPlayerID(), cUnitStateAlive, cUnitTypeLogicalTypeLandMilitary, settleLoc, 20);
 	   bonusCount = kbUnitQueryExecute(enemyQueryID);
-	   kbUnitQueryDestroy(enemyQueryID);
 	   if(bonusCount >= 5 + kbUnitCount(cMyID, cUnitTypeLogicalTypeLandMilitary, cUnitStateAlive))
 	   {
 		bonusCount = 0;	//Just accept the loss dude.
